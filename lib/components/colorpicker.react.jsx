@@ -27,20 +27,6 @@ var ColorPicker = React.createClass({
     return (
       /* jshint ignore: start */
       <div className="colorpicker">
-        <div className="light-slider">
-          <Slider
-            vertical={true}
-            value={rawHsv.v}
-            onChange={actions.setValue}
-          />
-        </div>
-        <div className="sat-slider">
-          <Slider
-            vertical={false}
-            value={rawHsv.s}
-            onChange={actions.setSaturation}
-          />
-        </div>
         <div className="hue-slider">
           <Slider
             vertical={true}
