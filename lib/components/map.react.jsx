@@ -11,11 +11,6 @@ var Map = React.createClass({
     };
   },
 
-  componentDidMount: function () {
-    document.addEventListener('mousemove', this.handleMouseMove);
-    document.addEventListener('mouseup', this.handleMouseUp);
-  },
-
   handleMouseDown: function (e) {
     e.preventDefault();
     this.setState({
@@ -60,7 +55,12 @@ var Map = React.createClass({
 
     return (
       /* jshint ignore: start */
-      <div className={classes} onMouseDown={this.handleMouseDown}>
+      <div
+        className={classes}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove}
+        onMouseUp={this.handleMouseUp}
+      >
         <div className="background" style={{
           backgroundColor: store.toHue()
         }} />
