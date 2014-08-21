@@ -3,6 +3,10 @@ var React = require('react/addons');
 var store = require('../store');
 var actions = require('../actions');
 
+function clamp(val, min, max){
+  return val < min? min : (val > max? max : val);
+}
+
 var Map = React.createClass({
 
   getInitialState: function () {
@@ -25,11 +29,8 @@ var Map = React.createClass({
     var x = (e.clientX - rect.left) / rect.width;
     var y = (rect.bottom - e.clientY) / rect.height;
 
-    if (x < 0) x = 0;
-    else if (x > 1) x = 1;
-
-    if (y < 0) y = 0;
-    else if (y > 1) y = 1;
+    x = clamp(x, 0, 1);
+    y = clamp(y, 0, 1);
 
     actions.setSaturation(x);
     actions.setValue(y);
