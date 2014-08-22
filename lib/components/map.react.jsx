@@ -16,31 +16,31 @@ var Map = React.createClass({
   },
 
   handleMouseDown: function (e) {
-    e.preventDefault();
-    this.setState({
-      active: true
-    });
+    this.setState({ active : true });
+    this.updateHueValue(e.clientX, e.clientY);
   },
 
   handleMouseMove: function (e) {
-    if (! this.state.active) return;
+    if (this.state.active) {
+      this.updateHueValue(e.clientX, e.clientY);
+    }
+  },
+
+  handleMouseUp: function () {
+    this.setState({ active : false });
+  },
+
+  updateHueValue : function(clientX, clientY) {
     var el = this.getDOMNode();
     var rect = el.getBoundingClientRect();
-    var x = (e.clientX - rect.left) / rect.width;
-    var y = (rect.bottom - e.clientY) / rect.height;
+    var x = (clientX - rect.left) / rect.width;
+    var y = (rect.bottom - clientY) / rect.height;
 
     x = clamp(x, 0, 1);
     y = clamp(y, 0, 1);
 
     actions.setSaturation(x);
     actions.setValue(y);
-  },
-
-  handleMouseUp: function () {
-    if (! this.state.active) return;
-    this.setState({
-      active: false
-    });
   },
 
   render: function () {
@@ -55,7 +55,6 @@ var Map = React.createClass({
     });
 
     return (
-      /* jshint ignore: start */
       <div
         className={classes}
         onMouseDown={this.handleMouseDown}
@@ -70,7 +69,6 @@ var Map = React.createClass({
           left: rawHsv.s * 100 + '%'
         }} />
       </div>
-      /* jshint ignore: end */
     );
   }
 
