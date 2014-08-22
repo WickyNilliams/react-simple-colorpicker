@@ -1,4 +1,5 @@
 var React = require('react/addons');
+var DraggableMixin = require("./DraggableMixin");
 var clamp = require("../util/clamp");
 var store = require('../store');
 var actions = require('../actions');
@@ -6,28 +7,9 @@ var actions = require('../actions');
 
 var Map = React.createClass({
 
-  getInitialState: function () {
-    return {
-      active: false
-    };
-  },
+  mixins : [DraggableMixin],
 
-  handleMouseDown: function (e) {
-    this.setState({ active : true });
-    this.updateHueValue(e.clientX, e.clientY);
-  },
-
-  handleMouseMove: function (e) {
-    if (this.state.active) {
-      this.updateHueValue(e.clientX, e.clientY);
-    }
-  },
-
-  handleMouseUp: function () {
-    this.setState({ active : false });
-  },
-
-  updateHueValue : function(clientX, clientY) {
+  updatePosition : function(clientX, clientY) {
     var el = this.getDOMNode();
     var rect = el.getBoundingClientRect();
     var x = (clientX - rect.left) / rect.width;
