@@ -1,11 +1,8 @@
 var React = require('react/addons');
-
+var clamp = require("../util/clamp");
 var store = require('../store');
 var actions = require('../actions');
 
-function clamp(val, min, max){
-  return val < min? min : (val > max? max : val);
-}
 
 var Map = React.createClass({
 
