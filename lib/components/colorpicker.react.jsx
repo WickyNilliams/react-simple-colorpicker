@@ -4,9 +4,7 @@ var Reflux = require('reflux');
 var store = require('../store');
 var actions = require('../actions');
 
-var Details = require('./details.react');
 var Map = require('./map.react');
-var Sample = require('./sample.react');
 var Slider = require('./slider.react');
 
 var ColorPicker = React.createClass({
@@ -35,8 +33,6 @@ var ColorPicker = React.createClass({
           />
         </div>
         <Map />
-        <Details />
-        <Sample />
       </div>
       /* jshint ignore: end */
     );
