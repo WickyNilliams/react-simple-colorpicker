@@ -21,6 +21,12 @@ var ColorPicker = React.createClass({
 
   render: function () {
     var rawHsv = store.toRawHsv();
+    var luminosity = store.toLum();
+
+    var classes = React.addons.classSet({
+      dark: luminosity <= 0.5,
+      light: luminosity > 0.5
+    });
 
     return (
       /* jshint ignore: start */
@@ -29,14 +35,29 @@ var ColorPicker = React.createClass({
           <Slider
             vertical={true}
             value={rawHsv.h}
-            onChange={actions.setHue}
+            onChange={this.handleHueChange}
           />
         </div>
-        <Map />
+        <Map
+          x={rawHsv.s}
+          y={rawHsv.v}
+          className={classes}
+          backgroundColor={store.toHue()}
+          onChange={this.handleSaturationValueChange} 
+        />
       </div>
       /* jshint ignore: end */
     );
-  }
+  },
+
+  handleHueChange : function(hue) {
+    actions.setHue(hue);
+  },
+
+  handleSaturationValueChange : function(saturation, value) {
+    actions.setSaturation(saturation);
+    actions.setValue(value);
+  },
 
 });
 

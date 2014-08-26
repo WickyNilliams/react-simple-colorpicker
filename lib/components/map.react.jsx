@@ -1,11 +1,17 @@
 var React = require('react/addons');
 var DraggableMixin = require("./DraggableMixin");
 var clamp = require("../util/clamp");
-var store = require('../store');
-var actions = require('../actions');
 
 
 var Map = React.createClass({
+
+  getDefaultProps: function() {
+    return {
+      x : 0,
+      y : 0,
+      backgroundColor : "transparent"
+    };
+  },
 
   mixins : [DraggableMixin],
 
@@ -18,34 +24,23 @@ var Map = React.createClass({
     x = clamp(x, 0, 1);
     y = clamp(y, 0, 1);
 
-    actions.setSaturation(x);
-    actions.setValue(y);
+    this.props.onChange(x, y);
   },
 
   render: function () {
-    var rawHsv = store.toRawHsv();
-    var lightness = store.toLum();
-
     var classes = React.addons.classSet({
       map: true,
-      dark: lightness <= 0.5,
-      light: lightness > 0.5,
       active: this.state.active
     });
 
     return (
-      <div
-        className={classes}
-        onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove}
-        onMouseUp={this.handleMouseUp}
-      >
+      <div className={this.props.className + " " + classes} onMouseDown={this.handleMouseDown}>
         <div className="background" style={{
-          backgroundColor: store.toHue()
+          backgroundColor: this.props.backgroundColor
         }} />
         <div className="pointer" style={{
-          top: (100 - rawHsv.v * 100) + '%',
-          left: rawHsv.s * 100 + '%'
+          left: (this.props.x * 100) + '%',
+          bottom: (this.props.y * 100) + '%'
         }} />
       </div>
     );
