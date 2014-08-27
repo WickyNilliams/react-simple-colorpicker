@@ -1,29 +1,32 @@
 var React = require('react/addons');
 var DraggableMixin = require("./DraggableMixin");
-var clamp = require("../util/clamp");
 
 
 var Map = React.createClass({
+
+  mixins : [DraggableMixin],
+
+  propTypes: {
+    x : React.PropTypes.number,
+    y : React.PropTypes.number,
+    backgroundColor : React.PropTypes.string
+  },
 
   getDefaultProps: function() {
     return {
       x : 0,
       y : 0,
-      backgroundColor : "transparent",
-      max : 1
+      backgroundColor : "transparent"
     };
   },
 
-  mixins : [DraggableMixin],
-
   updatePosition : function(clientX, clientY) {
-    var el = this.getDOMNode();
-    var rect = el.getBoundingClientRect();
+    var rect = this.getDOMNode().getBoundingClientRect();
     var x = (clientX - rect.left) / rect.width;
     var y = (rect.bottom - clientY) / rect.height;
 
-    x = clamp(x, 0, 1) * this.props.max;
-    y = clamp(y, 0, 1) * this.props.max;
+    x = this.getScaledValue(x);
+    y = this.getScaledValue(y);
 
     this.props.onChange(x, y);
   },
@@ -40,8 +43,8 @@ var Map = React.createClass({
           backgroundColor: this.props.backgroundColor
         }} />
         <div className="pointer" style={{
-          left: (this.props.x / this.props.max) * 100 + '%',
-          bottom: (this.props.y / this.props.max) * 100 + '%'
+          left: this.getPercentageValue(this.props.x),
+          bottom: this.getPercentageValue(this.props.y)
         }} />
       </div>
     );

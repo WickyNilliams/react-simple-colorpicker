@@ -1,5 +1,4 @@
 var React = require('react/addons');
-var clamp = require('../util/clamp');
 var DraggableMixin = require("./DraggableMixin");
 
 
@@ -7,21 +6,19 @@ var Slider = React.createClass({
 
   mixins : [DraggableMixin],
 
-  getDefaultProps: function() {
-    return {
-      value : 0,
-      max : 1
-    };
-  },
-
   propTypes: {
     vertical: React.PropTypes.bool.isRequired,
     value: React.PropTypes.number.isRequired
   },
 
+  getDefaultProps: function() {
+    return {
+      value : 0
+    };
+  },
+
   updatePosition : function(clientX, clientY) {
-    var el = this.getDOMNode();
-    var rect = el.getBoundingClientRect();
+    var rect = this.getDOMNode().getBoundingClientRect();
 
     var value;
     if (this.props.vertical) {
@@ -30,14 +27,14 @@ var Slider = React.createClass({
       value = (clientX - rect.left) / rect.width;
     }
 
-    value = clamp(value, 0, 1) * this.props.max;
+    value = this.getScaledValue(value);
     this.props.onChange(value);
   },
 
   getCss: function () {
     var obj = {};
     var attr = this.props.vertical ? 'bottom' : 'left';
-    obj[attr] = (this.props.value / this.props.max) * 100 + '%';
+    obj[attr] = this.getPercentageValue(this.props.value);
     return obj;
   },
 
