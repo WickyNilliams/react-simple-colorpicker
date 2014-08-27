@@ -46,7 +46,11 @@ var Slider = React.createClass({
     });
 
     return (
-      <div className={classes} onMouseDown={this.handleMouseDown}>
+      <div
+        className={classes}
+        onMouseDown={this.startUpdates}
+        onTouchStart={this.startUpdates}
+      >
         <div className="track" />
         <div className="pointer" style={this.getCss()} />
       </div>
