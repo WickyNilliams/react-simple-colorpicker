@@ -1,8 +1,8 @@
-var React = require('react');
+var React = require("react");
 var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
-var Colr = require('colr');
-var Map = require('./map.react');
-var Slider = require('./slider.react');
+var Colr = require("colr");
+var Map = require("./map.react");
+var Slider = require("./slider.react");
 
 
 var ColorPicker = React.createClass({
@@ -20,10 +20,10 @@ var ColorPicker = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var nextColor = nextProps.color.toLowerCase();
-    var currentColor = this.getColorFromRaw().toHex().toLowerCase();
+    var nextColor = nextProps.color;
+    var currentColor = Colr.fromHsvObject(this.state.hsv).toHex();
 
-    if(nextColor !== currentColor) {
+    if(nextColor.toLowerCase() !== currentColor.toLowerCase()) {
       this.setState(this.getStateFrom(nextColor));
     }
   },
@@ -36,7 +36,6 @@ var ColorPicker = React.createClass({
   },
 
   render: function () {
-    var hsv = this.state.hsv;
     var luminosity = this.getLuminosity();
     var hue = this.getBackgroundHue();
 
@@ -50,14 +49,14 @@ var ColorPicker = React.createClass({
         <div className="hue-slider">
           <Slider
             vertical={true}
-            value={hsv.h}
+            value={this.state.hsv.h}
             max={360}
             onChange={this.handleHueChange}
           />
         </div>
         <Map
-          x={hsv.s}
-          y={hsv.v}
+          x={this.state.hsv.s}
+          y={this.state.hsv.v}
           max={100}
           className={classes}
           backgroundColor={hue}
@@ -68,32 +67,33 @@ var ColorPicker = React.createClass({
   },
 
   getLuminosity : function() {
-    return this.getColorFromRaw().toGrayscale() / 255;
+    return Colr.fromHsvObject(this.state.hsv).toGrayscale() / 255;
   },
 
   getBackgroundHue : function() {
     return Colr.fromHsv(this.state.hsv.h, 100, 100).toHex();
   },
 
-  getColorFromRaw : function() {
-    var hsv = this.state.hsv;
-    return Colr.fromHsv(hsv.h, hsv.s, hsv.v);
-  },
-
   handleHueChange : function(hue) {
-    this.state.hsv.h = hue;
-    this.update();
+    this.update({
+      h : hue,
+      s : this.state.hsv.s,
+      v : this.state.hsv.v
+    });
   },
 
   handleSaturationValueChange : function(saturation, value) {
-    this.state.hsv.s = saturation;
-    this.state.hsv.v = value;
-    this.update();
+    this.update({
+      h : this.state.hsv.h,
+      s : saturation,
+      v : value
+    });
   },
 
-  update : function() {
-    var color = this.getColorFromRaw()
+  update : function(hsv) {
+    var color = Colr.fromHsvObject(hsv);
     this.props.onChange(color.toHex());
+    this.setState({ hsv : hsv });
   }
 
 });
