@@ -1,5 +1,6 @@
 var React = require("react");
 var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
+var cx = require("react/lib/cx");
 var Colr = require("colr");
 var Map = require("./map.react");
 var Slider = require("./slider.react");
@@ -39,7 +40,7 @@ var ColorPicker = React.createClass({
     var luminosity = this.getLuminosity();
     var hue = this.getBackgroundHue();
 
-    var classes = React.addons.classSet({
+    var classes = cx({
       dark: luminosity <= 0.5,
       light: luminosity > 0.5
     });

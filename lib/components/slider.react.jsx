@@ -1,5 +1,6 @@
-var React = require('react/addons');
+var React = require("react");
 var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
+var cx = require("react/lib/cx");
 var DraggableMixin = require("./DraggableMixin");
 
 
@@ -34,13 +35,13 @@ var Slider = React.createClass({
 
   getCss: function () {
     var obj = {};
-    var attr = this.props.vertical ? 'bottom' : 'left';
+    var attr = this.props.vertical ? "bottom" : "left";
     obj[attr] = this.getPercentageValue(this.props.value);
     return obj;
   },
 
   render: function () {
-    var classes = React.addons.classSet({
+    var classes = cx({
       slider: true,
       vertical: this.props.vertical,
       horizontal: ! this.props.vertical

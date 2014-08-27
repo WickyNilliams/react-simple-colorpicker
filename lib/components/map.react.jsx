@@ -1,5 +1,6 @@
-var React = require('react/addons');
+var React = require("react");
 var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
+var cx = require("react/lib/cx");
 var DraggableMixin = require("./DraggableMixin");
 
 
@@ -33,7 +34,7 @@ var Map = React.createClass({
   },
 
   render: function () {
-    var classes = React.addons.classSet({
+    var classes = cx({
       map: true,
       active: this.state.active
     });
