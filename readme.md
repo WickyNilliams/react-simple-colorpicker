@@ -1,12 +1,8 @@
 # React-ColorPicker
 
-> A simple colorpicker written using React.
+> A simple(r) colorpicker written using React.
 
-## Installation
-
-```
-npm install --save react-colorpicker
-```
+A fork of [react-colorpicker](https://github.com/stayradiated/react-colorpicker), but with the extra stuff removed.
 
 ## Usage
 
@@ -14,17 +10,27 @@ npm install --save react-colorpicker
 var React = require('react');
 var ColorPicker = require('react-colorpicker');
 
-var colorpicker = new ColorPicker({
-    color: '#c0ffee',
-    onChange: function (color) {
-        // fired whenever user changes color
-        // color is a Color instance
-        // https://github.com/harthur/color
+var App = React.createClass({
 
-        console.log(color.hexString());
-    }
+  getInitialState: function() {
+    return {
+      color : this.props.initialColor
+    };
+  },
+
+  render: function() {
+    return (
+      <ColorPicker color={this.state.color} onChange={this.handleChange} />
+    );
+  },
+
+  handleChange : function(color) {
+    console.log(color); // color is a hex string
+    this.setState({ color : color });
+  }
+
 });
 
-React.renderComponent(colorpicker, document.body);
+React.renderComponent(<App initialColor="#bada55" />, document.body);
 ```
 
