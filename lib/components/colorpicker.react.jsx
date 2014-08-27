@@ -1,8 +1,8 @@
 var React = require('react');
-var Color = require('color');
-
+var Colr = require('colr');
 var Map = require('./map.react');
 var Slider = require('./slider.react');
+
 
 var ColorPicker = React.createClass({
 
@@ -17,15 +17,16 @@ var ColorPicker = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var state = this.getStateFrom(nextProps.color);
+    var nextColor = nextProps.color.toLowerCase();
+    var currentColor = this.getColorFromRaw().toHex().toLowerCase();
 
-    if(state.color.hexString() !== this.state.color.hexString()) {
-      this.setState(state);
+    if(nextColor !== currentColor) {
+      this.setState(this.getStateFrom(nextProps.color));
     }
   },
 
   getStateFrom : function(color) {
-    color = new Color(color);
+    color = Colr.fromHex(color);
     return {
       color : color,
       raw : this.getRawHsv(color)
@@ -33,10 +34,9 @@ var ColorPicker = React.createClass({
   },
 
   render: function () {
-    var color = this.state.color;
     var rawHsv = this.state.raw;
-    var luminosity = color.luminosity();
-    var hue = this.toHue(color);
+    var luminosity = this.getLuminosity();
+    var hue = this.getBackgroundHue();
 
     var classes = React.addons.classSet({
       dark: luminosity <= 0.5,
@@ -65,12 +65,16 @@ var ColorPicker = React.createClass({
     );
   },
 
-  toHue : function(color) {
-    return Color().hsv(color.hue(), 100, 100).hexString();
+  getLuminosity : function() {
+    return this.state.color.toGrayscale() / 255;
+  },
+
+  getBackgroundHue : function() {
+    return Colr.fromHsv(this.state.raw.h * 360, 100, 100).toHex();
   },
 
   getRawHsv : function(color) {
-    var hsv = color.hsv();
+    var hsv = color.toHsvObject();
     return {
       h: hsv.h / 360,
       s: hsv.s / 100,
@@ -78,37 +82,27 @@ var ColorPicker = React.createClass({
     };
   },
 
-  handleHueChange : function(hue) {
-    var color = this.state.color;
+  getColorFromRaw : function() {
     var raw = this.state.raw;
-    var oldColor = color.hexString();
+    return Colr.fromHsv(raw.h * 360, raw.s * 100, raw.v * 100);
+  },
 
-    raw.h = hue;
-    color.hue(hue * 360);
-
-    this.setState(this.state);
-
-    if(oldColor != color.hexString()) {
-      this.props.onChange(this.state.color.hexString());
-    }
+  handleHueChange : function(hue) {
+    this.state.raw.h = hue;
+    this.update();
   },
 
   handleSaturationValueChange : function(saturation, value) {
-    var color = this.state.color;
-    var raw = this.state.raw;
-    var oldColor = color.hexString();
-
-    color.saturationv(saturation * 100);
-    color.value(value * 100);
-    raw.s = saturation;
-    raw.v = value;
-
-    this.setState(this.state);
-
-    if(oldColor != color.hexString()) {
-      this.props.onChange(color.hexString());
-    }
+    this.state.raw.s = saturation;
+    this.state.raw.v = value;
+    this.update();
   },
+
+  update : function() {
+    var color = this.getColorFromRaw()
+    this.props.onChange(color.toHex());
+    this.setState({ color : color });
+  }
 
 });
 

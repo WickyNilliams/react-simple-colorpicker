@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/stayradiated/react-colorpicker",
   "dependencies": {
-    "color": "^0.7.1",
-    "react": "^0.11.1"
+    "react": "^0.11.1",
+    "colr": "^1.0.8"
   },
   "devDependencies": {
     "browserify": "^5.9.1",

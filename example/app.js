@@ -3,8 +3,8 @@
  */
 
 var React = require("react");
-window.React = React;
 var ColorPicker = require("../lib/");
+window.React = React;
 
 var App = React.createClass({
 
@@ -38,11 +38,9 @@ var App = React.createClass({
 
   handleChangeA : function(color) {
     this.setState({ colorA : color });
-    console.log(color);
   },
   handleChangeB : function(color) {
     this.setState({ colorB : color });
-    console.log(color);
   },
 
 });
