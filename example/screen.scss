@@ -25,15 +25,14 @@ body {
   top: 0;
   bottom: 0;
   width: 100%;
-  border: 20px solid #333;
 }
 
 .map {
   position: absolute;
-  top: 10%;
-  bottom: 0;
-  left: 10%;
-  width: 40%;
+  top: 1em;
+  bottom: 1em;
+  left: 1em;
+  width: 60%;
   user-select: none;
   overflow: hidden;
 
@@ -54,7 +53,7 @@ body {
     width: 10px;
     height: 10px;
     margin-left: -5px;
-    margin-top: -5px;
+    margin-bottom: -5px;
     border-radius: 100%;
     border: 1px solid #000;
   }
@@ -172,9 +171,9 @@ body {
 
 .hue-slider {
   position: absolute;
-  top: 10%;
-  bottom: 0;
-  left: 50%;
+  top: 1em;
+  bottom: 1em;
+  left: 65%;
   width: 10%;
   
   .track {
@@ -224,4 +223,26 @@ body {
     text-transform: uppercase;
   }
 
+}
+
+.picker {
+  position: absolute;
+  top : 1em;
+  bottom: 1em;
+  left: 1em;
+  right: 1em;
+}
+.picker-left {
+  right: 52.5%;
+}
+.picker-right {
+  left: 55%;
+}
+
+.picker-preview {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 1em;
+  right: 1em;
 }

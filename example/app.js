@@ -1,15 +1,50 @@
-var React = require('react');
-var ColorPicker = require('../lib/index');
+/**
+ * @jsx React.DOM
+ */
 
-document.addEventListener('DOMContentLoaded', function () {
-  var container = document.getElementById('container');
+var React = require("react");
+window.React = React;
+var ColorPicker = require("../lib/");
 
-  var colorpicker = new ColorPicker({
-    color: '#408080',
-    onChange: function (color) {
-      // do something with color
-    }
-  });
+var App = React.createClass({
 
-  React.renderComponent(colorpicker, container);
+  getInitialState: function() {
+    return {
+      colorA : "#bada55",
+      colorB : "#ffffff"
+    };
+  },
+
+  render: function() {
+    return (
+      <div>
+        <div className="picker picker-left">
+          <ColorPicker color={this.state.colorA} onChange={this.handleChangeA} />
+          <div className="picker-preview" style={{
+            backgroundColor : this.state.colorA
+          }} />
+        </div>
+
+        <div className="picker picker-right">
+          <ColorPicker color={this.state.colorB} onChange={this.handleChangeB} />
+          <div className="picker-preview" style={{
+            backgroundColor : this.state.colorB
+          }} />
+        </div>
+
+      </div>
+    );
+  },
+
+  handleChangeA : function(color) {
+    this.setState({ colorA : color });
+    console.log(color);
+  },
+  handleChangeB : function(color) {
+    this.setState({ colorB : color });
+    console.log(color);
+  },
+
 });
+
+React.renderComponent(<App />, document.body);
