@@ -27,7 +27,7 @@ gulp.task('example', ['example/stylesheets', 'example/app'], function () {
 
   return connect.server({
     root: ['example/dist'],
-    port: 8000,
+    port: 8001,
     livereload: true
   });
 });
@@ -37,7 +37,8 @@ gulp.task('example/app', function () {
     cache: {},
     packageCache: {},
     fullPaths: true,
-    extensions: '.jsx'
+    extensions: '.jsx',
+    debug : true
   }));
 
   bundler.add('./example/app.js');
