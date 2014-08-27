@@ -9,7 +9,8 @@ var Map = React.createClass({
     return {
       x : 0,
       y : 0,
-      backgroundColor : "transparent"
+      backgroundColor : "transparent",
+      max : 1
     };
   },
 
@@ -21,8 +22,8 @@ var Map = React.createClass({
     var x = (clientX - rect.left) / rect.width;
     var y = (rect.bottom - clientY) / rect.height;
 
-    x = clamp(x, 0, 1);
-    y = clamp(y, 0, 1);
+    x = clamp(x, 0, 1) * this.props.max;
+    y = clamp(y, 0, 1) * this.props.max;
 
     this.props.onChange(x, y);
   },
@@ -39,8 +40,8 @@ var Map = React.createClass({
           backgroundColor: this.props.backgroundColor
         }} />
         <div className="pointer" style={{
-          left: (this.props.x * 100) + '%',
-          bottom: (this.props.y * 100) + '%'
+          left: (this.props.x / this.props.max) * 100 + '%',
+          bottom: (this.props.y / this.props.max) * 100 + '%'
         }} />
       </div>
     );

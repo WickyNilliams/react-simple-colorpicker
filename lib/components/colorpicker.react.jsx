@@ -3,16 +3,6 @@ var Colr = require('colr');
 var Map = require('./map.react');
 var Slider = require('./slider.react');
 
-Colr.prototype.toScaledHsv = function(color) {
-  var hsv = this.toHsvObject();
-
-  return {
-    h: hsv.h / 360,
-    s: hsv.s / 100,
-    v: hsv.v / 100
-  };
-};
-
 
 var ColorPicker = React.createClass({
 
@@ -38,7 +28,7 @@ var ColorPicker = React.createClass({
   getStateFrom : function(color) {
     color = Colr.fromHex(color);
     return {
-      hsv : color.toScaledHsv()
+      hsv : color.toHsvObject()
     };
   },
 
@@ -58,12 +48,14 @@ var ColorPicker = React.createClass({
           <Slider
             vertical={true}
             value={hsv.h}
+            max={360}
             onChange={this.handleHueChange}
           />
         </div>
         <Map
           x={hsv.s}
           y={hsv.v}
+          max={100}
           className={classes}
           backgroundColor={hue}
           onChange={this.handleSaturationValueChange}
@@ -77,12 +69,12 @@ var ColorPicker = React.createClass({
   },
 
   getBackgroundHue : function() {
-    return Colr.fromHsv(this.state.hsv.h * 360, 100, 100).toHex();
+    return Colr.fromHsv(this.state.hsv.h, 100, 100).toHex();
   },
 
   getColorFromRaw : function() {
     var hsv = this.state.hsv;
-    return Colr.fromHsv(hsv.h * 360, hsv.s * 100, hsv.v * 100);
+    return Colr.fromHsv(hsv.h, hsv.s, hsv.v);
   },
 
   handleHueChange : function(hue) {

@@ -7,6 +7,13 @@ var Slider = React.createClass({
 
   mixins : [DraggableMixin],
 
+  getDefaultProps: function() {
+    return {
+      value : 0,
+      max : 1
+    };
+  },
+
   propTypes: {
     vertical: React.PropTypes.bool.isRequired,
     value: React.PropTypes.number.isRequired
@@ -23,14 +30,14 @@ var Slider = React.createClass({
       value = (clientX - rect.left) / rect.width;
     }
 
-    value = clamp(value, 0, 1);
+    value = clamp(value, 0, 1) * this.props.max;
     this.props.onChange(value);
   },
 
   getCss: function () {
     var obj = {};
     var attr = this.props.vertical ? 'bottom' : 'left';
-    obj[attr] = this.props.value * 100 + '%';
+    obj[attr] = (this.props.value / this.props.max) * 100 + '%';
     return obj;
   },
 
