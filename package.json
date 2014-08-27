@@ -30,8 +30,7 @@
   "homepage": "https://github.com/stayradiated/react-colorpicker",
   "dependencies": {
     "color": "^0.7.1",
-    "react": "^0.11.1",
-    "reflux": "^0.1.6"
+    "react": "^0.11.1"
   },
   "devDependencies": {
     "browserify": "^5.9.1",
