@@ -1,10 +1,11 @@
 var React = require('react/addons');
+var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
 var DraggableMixin = require("./DraggableMixin");
 
 
 var Map = React.createClass({
 
-  mixins : [DraggableMixin],
+  mixins : [DraggableMixin, PureRenderMixin],
 
   propTypes: {
     x : React.PropTypes.number,

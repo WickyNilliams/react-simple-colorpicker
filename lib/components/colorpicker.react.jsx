@@ -1,10 +1,13 @@
 var React = require('react');
+var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
 var Colr = require('colr');
 var Map = require('./map.react');
 var Slider = require('./slider.react');
 
 
 var ColorPicker = React.createClass({
+
+  mixins : [PureRenderMixin],
 
   getDefaultProps : function() {
     return {
