@@ -20,15 +20,14 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100%;
-  border: 20px solid #333; }
+  width: 100%; }
 
 .map {
   position: absolute;
-  top: 10%;
-  bottom: 0;
-  left: 10%;
-  width: 40%;
+  top: 1em;
+  bottom: 1em;
+  left: 1em;
+  width: 80%;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -42,12 +41,10 @@ body {
     border-color: #000; }
   .map .pointer {
     position: absolute;
-    top: 20%;
-    left: 20%;
     width: 10px;
     height: 10px;
     margin-left: -5px;
-    margin-top: -5px;
+    margin-bottom: -5px;
     border-radius: 100%;
     border: 1px solid #000; }
   .map .background {
@@ -141,9 +138,9 @@ body {
 
 .hue-slider {
   position: absolute;
-  top: 10%;
-  bottom: 0;
-  left: 50%;
+  top: 1em;
+  bottom: 1em;
+  left: 85%;
   width: 10%; }
   .hue-slider .track {
     background: -webkit-linear-gradient(top, #FF0000 0%, #FF0099 10%, #CD00FF 20%, #3200FF 30%, #0066FF 40%, #00FFFD 50%, #00FF66 60%, #35FF00 70%, #CDFF00 80%, #FF9900 90%, #FF0000 100%);
@@ -166,3 +163,54 @@ body {
     color: #ccc; }
   .details .hex {
     text-transform: uppercase; }
+
+.picker {
+  position: absolute;
+  top: 1em;
+  height: 300px;
+  left: 1em;
+  right: 1em; }
+
+.picker-left {
+  right: 50%; }
+
+.picker-right {
+  left: 50%; }
+
+.picker-preview {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 1em;
+  right: 1em; }
+
+.swatch-item {
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  float: left;
+  outline: 1px solid rgba(0, 0, 0, 0.25);
+  border: none;
+  font-size: 12px;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-transition: -webkit-transform 0.1s;
+          transition: -webkit-transform 0.1s;
+  transition: transform 0.1s;
+  position: relative; }
+
+.swatch-dark {
+  color: #fff; }
+
+.swatch-light {
+  color: #000; }
+
+.swatch-item:focus {
+  outline: 1px solid rgba(0, 0, 0, 0.75); }
+
+.swatch-item.swatch-selected {
+  -ms-transform: scale(1.1);
+      transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  outline: 2px solid rgba(0, 0, 0, 0.75);
+  z-index: 10; }
