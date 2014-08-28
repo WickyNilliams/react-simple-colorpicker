@@ -225,18 +225,44 @@ body {
 
 }
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 .picker {
-  position: absolute;
-  top : 1em;
-  height: 300px;
-  left: 1em;
-  right: 1em;
+  position: relative;
+  margin-bottom: 1em;
+  @include clearfix;
 }
-.picker-left {
-  right: 50%;
-}
+
 .picker-right {
-  left: 50%;
+  height: 20em;
+}
+
+// .picker {
+//   position: absolute;
+//   top : 1em;
+//   height: 300px;
+//   left: 1em;
+//   right: 1em;
+// }
+// .picker-left {
+//   right: 50%;
+// }
+// .picker-right {
+//   left: 50%;
+// }
+
+@media (min-width:50em) {
+  .picker {
+    width: 50%;
+    float: left;
+  }
+
 }
 
 .picker-preview {
