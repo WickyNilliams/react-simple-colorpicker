@@ -46,7 +46,6 @@ module.exports = function(grunt) {
         dest : "<%= paths.output %>",
         options : {
           watch : true,
-          keepAlive : true,
           bundleOptions : {
             debug : true,
           }
@@ -56,6 +55,23 @@ module.exports = function(grunt) {
         src  : "<%= paths.entry %>",
         dest : "<%= paths.output %>"
       }
+    },
+
+    sass : {
+      example : {
+        options : {
+          style : "compressed"
+        },
+        src : "example/screen.scss",
+        dest : "example/dist/css/screen.css"
+      }
+    },
+
+    watch : {
+      styles : {
+        files : ["<%= sass.example.src %>"],
+        tasks : ["sass"]
+      }
     }
 
   });
@@ -63,8 +79,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-env");
   grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-contrib-sass");
+  grunt.loadNpmTasks("grunt-contrib-watch");
 
-  grunt.registerTask("default", ["env:dev", "browserify:dev"]);
-  grunt.registerTask("dist", ["env:dist", "browserify:dist", "uglify:dist"]);
+  grunt.registerTask("default", ["env:dev", "browserify:dev", "watch"]);
+  grunt.registerTask("dist", ["env:dist", "browserify:dist", "sass", "uglify:dist"]);
   
 };

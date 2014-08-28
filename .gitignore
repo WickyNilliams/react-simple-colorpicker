@@ -3,3 +3,4 @@ node_modules
 /gh-pages
 /example/dist/js/*
 /example/dist/css/*
+.sass-cache
