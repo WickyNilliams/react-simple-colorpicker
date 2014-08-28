@@ -1,20 +1,18 @@
 {
-  "name": "react-colorpicker",
-  "version": "0.0.4",
+  "name": "react-simple-colorpicker",
+  "version": "0.1.0",
   "description": "Colorpicker for React",
-  "main": "lib/index.js",
-  "directories": {
-    "example": "example"
-  },
+  "main": "pkg/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/WickyNilliams/react-colorpicker"
+    "url": "git://github.com/WickyNilliams/react-simple-colorpicker"
   },
   "keywords": [
     "react",
+    "react-component",
     "color",
     "colour",
     "picker",
@@ -22,12 +20,15 @@
     "hsv",
     "hex"
   ],
-  "author": "George Czabania",
+  "author": {
+    "name": "Nick Williams",
+    "url": "http://wicky.nillia.ms"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WickyNilliams/react-colorpicker/issues"
+    "url": "https://github.com/WickyNilliams/react-simple-colorpicker/issues"
   },
-  "homepage": "https://github.com/WickyNilliams/react-colorpicker",
+  "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "dependencies": {
     "react": "^0.11.1",
     "colr": "^1.0.8"
@@ -40,6 +41,7 @@
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-browserify": "^2.1.4",
     "grunt-contrib-sass": "^0.8.1",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-react": "^0.9.0"
   }
 }
