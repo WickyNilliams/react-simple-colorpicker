@@ -60,10 +60,21 @@ module.exports = function(grunt) {
     sass : {
       example : {
         options : {
-          style : "compressed"
+          style : "compressed",
+          noCache : true
         },
         src : "example/screen.scss",
         dest : "example/dist/css/screen.css"
+      }
+    },
+
+    react: {
+      files: {
+        expand: true,
+        cwd: 'lib',
+        src: ['**/*.*'],
+        dest: 'pkg',
+        ext: '.js'
       }
     },
 
@@ -71,6 +82,10 @@ module.exports = function(grunt) {
       styles : {
         files : ["<%= sass.example.src %>"],
         tasks : ["sass"]
+      },
+      lib : {
+        files : ["lib"],
+        tasks : ["react"]
       }
     }
 
@@ -81,8 +96,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-sass");
   grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-react");
 
   grunt.registerTask("default", ["env:dev", "browserify:dev", "watch"]);
-  grunt.registerTask("dist", ["env:dist", "browserify:dist", "sass", "uglify:dist"]);
+  grunt.registerTask("dist", ["env:dist", "react", "browserify:dist", "sass", "uglify:dist"]);
   
 };
