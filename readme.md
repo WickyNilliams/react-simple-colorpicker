@@ -1,14 +1,20 @@
-# React-ColorPicker
+# React-Simple-ColorPicker
 
 > A simple(r) colorpicker written using React.
 
 A fork of [react-colorpicker](https://github.com/stayradiated/react-colorpicker), but with the extra stuff removed.
 
+## Install
+
+```bash
+npm install react-simple-colorpicker --save
+```
+
 ## Usage
 
 ```javascript
 var React = require('react');
-var ColorPicker = require('react-colorpicker');
+var ColorPicker = require('react-simple-colorpicker');
 
 var App = React.createClass({
 
@@ -31,6 +37,6 @@ var App = React.createClass({
 
 });
 
-React.renderComponent(<App initialColor="#bada55" />, document.body);
+React.render(<App initialColor="#bada55" />, document.body);
 ```
 
