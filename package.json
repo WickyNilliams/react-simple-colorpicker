@@ -1,6 +1,6 @@
 {
   "name": "react-simple-colorpicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Colorpicker for React",
   "main": "pkg/index.js",
   "scripts": {
@@ -31,7 +31,6 @@
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "dependencies": {
     "colr": "^1.0.8",
-    "grunt-react": "^0.10.0",
     "react": "^0.12.2"
   },
   "devDependencies": {
@@ -42,7 +41,7 @@
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-env": "^0.4.1",
-    "grunt-react": "^0.9.0",
+    "grunt-react": "^0.10.0",
     "reactify": "^0.17.1"
   }
 }
