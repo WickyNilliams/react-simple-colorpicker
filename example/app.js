@@ -58,4 +58,4 @@ var App = React.createClass({
 });
 
 React.initializeTouchEvents(true);
-React.renderComponent(<App />, document.body);
+React.render(<App />, document.body);

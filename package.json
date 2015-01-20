@@ -30,18 +30,19 @@
   },
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "dependencies": {
-    "react": "^0.11.1",
-    "colr": "^1.0.8"
+    "colr": "^1.0.8",
+    "grunt-react": "^0.10.0",
+    "react": "^0.12.2"
   },
   "devDependencies": {
-    "reactify": "^0.14.0",
-    "grunt-env": "^0.4.1",
     "envify": "^3.0.0",
     "grunt": "^0.4.5",
-    "grunt-contrib-uglify": "^0.5.1",
     "grunt-browserify": "^2.1.4",
     "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-react": "^0.9.0"
+    "grunt-env": "^0.4.1",
+    "grunt-react": "^0.9.0",
+    "reactify": "^0.17.1"
   }
 }
