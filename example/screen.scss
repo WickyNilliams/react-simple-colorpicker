@@ -30,7 +30,7 @@ body {
 .map {
   position: absolute;
   top: 1em;
-  bottom: 1em;
+  bottom: 3em;
   left: 1em;
   width: 80%;
   user-select: none;
@@ -172,10 +172,10 @@ body {
 .hue-slider {
   position: absolute;
   top: 1em;
-  bottom: 1em;
+  bottom: 3em;
   left: 85%;
   width: 10%;
-  
+
   .track {
     background: linear-gradient(to bottom,
       #FF0000 0%,
@@ -194,6 +194,30 @@ body {
 
 }
 
+.opacity-slider {
+  position: absolute;
+  top: auto;
+  bottom: 1.5em;
+  left: 1em;
+  width: 80%;
+
+  .slider {
+
+    background: #fff url('data:image/gif;base64,R0lGODdhEAAQAPEAAMvLy8zMzP///wAAACwAAAAAEAAQAEACHYxvosstCAEMrq6Jj812Y59NIDQipdY5XLWqH4sVADs=') repeat;
+    background-size: 8px 8px;
+    height: 8px;
+
+    .track {
+      height: 8px;
+      margin-top: -4px;
+      background: linear-gradient(to right,
+        rgba(255,255,255,0) 0%,
+        #FFF 100%
+      );
+    }
+  }
+
+}
 
 .details {
   position: absolute;

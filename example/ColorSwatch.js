@@ -4,26 +4,24 @@
 
 var React = require("react");
 var cx = require("react/lib/cx");
-var Colr = require("colr");
-
+var tinycolor = require("tinycolor2");
 
 var SwatchItem = React.createClass({
 
   render: function() {
-    var color = this.props.color;
-    var styles = { backgroundColor : color };
-    var luminosity = Colr.fromHex(color).toGrayscale() / 255;
+    var color = tinycolor(this.props.color);
+    var styles = { backgroundColor : color.toRgbString() };
 
     var classes = cx({
       "swatch-item" : true,
       "swatch-selected" : this.props.selected,
-      "swatch-dark": luminosity <= 0.5,
-      "swatch-light": luminosity > 0.5
+      "swatch-dark": color.isDark(),
+      "swatch-light": color.isLight()
     });
 
     return (
       <button className={classes} style={styles} onClick={this.handleClick}>
-        {color}
+        {color.toRgbString()}
       </button>
     );
   },

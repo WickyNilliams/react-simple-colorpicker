@@ -34,7 +34,6 @@
     "tinycolor2": "^1.1.2"
   },
   "devDependencies": {
-    "colr": "^1.0.8",
     "envify": "^3.0.0",
     "grunt": "^0.4.5",
     "grunt-browserify": "^2.1.4",
