@@ -28,7 +28,7 @@ var ColorPicker = React.createClass({displayName: "ColorPicker",
   componentWillReceiveProps: function(nextProps) {
     var nextColor = tinycolor(nextProps.color);
 
-    if (!nextColor.toRgbString() === this.state.color.toRgbString()) {
+    if (nextColor.toRgbString() !== this.state.color.toRgbString()) {
       this.setState(this.getStateFrom(nextColor));
     }
   },
