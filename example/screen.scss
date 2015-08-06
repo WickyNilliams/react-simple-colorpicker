@@ -30,11 +30,15 @@ body {
 .map {
   position: absolute;
   top: 1em;
-  bottom: 3em;
+  bottom: 1em;
   left: 1em;
   width: 80%;
   user-select: none;
   overflow: hidden;
+
+  .with-opacity-slider & {
+    bottom: 3em;
+  }
 
   &.active {
     cursor: none;
@@ -172,9 +176,13 @@ body {
 .hue-slider {
   position: absolute;
   top: 1em;
-  bottom: 3em;
+  bottom: 1em;
   left: 85%;
   width: 10%;
+
+  .with-opacity-slider & {
+    bottom: 3em;
+  }
 
   .track {
     background: linear-gradient(to bottom,
