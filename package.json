@@ -31,7 +31,7 @@
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "dependencies": {
     "colr": "^1.0.8",
-    "react": "^0.12.2"
+    "react": ">=0.12.2"
   },
   "devDependencies": {
     "envify": "^3.0.0",
