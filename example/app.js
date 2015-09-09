@@ -38,6 +38,7 @@ var App = React.createClass({
         <div className="picker picker-right">
           <ColorPicker
             color={selectedColor}
+            opacitySlider={true}
             onChange={this.handleColorChange}
           />
         </div>

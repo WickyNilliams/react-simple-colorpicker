@@ -1,6 +1,6 @@
 node_modules
-/pkg
 /gh-pages
 /example/dist/js/*
 /example/dist/css/*
 .sass-cache
+/pkg
