@@ -26,17 +26,17 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <ColorPicker color={this.state.color} onChange={this.handleChange} />
+      <ColorPicker color={this.state.color} onChange={this.handleChange} opacitySlider={true} />
     );
   },
 
   handleChange : function(color) {
-    console.log(color); // color is a hex string
+    console.log(color); // color is rgb(a) string
     this.setState({ color : color });
   }
 
 });
 
-React.render(<App initialColor="#bada55" />, document.body);
+React.render(<App initialColor="rgb(0,0,0,1)" />, document.body);
 ```
 
