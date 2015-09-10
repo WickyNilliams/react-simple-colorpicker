@@ -5,8 +5,7 @@
   "main": "pkg/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "grunt",
-    "prepublish" : "grunt dist"
+    "start" : "grunt"
   },
   "repository": {
     "type": "git",
