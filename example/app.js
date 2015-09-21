@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var React = require("react");
 var ColorPicker = require("../lib/");
 var ColorSwatch = require("./ColorSwatch");

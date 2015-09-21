@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var React = require("react");
 var cx = require("react/lib/cx");
 var tinycolor = require("tinycolor2");
