@@ -1,31 +1,34 @@
 var React = require("react");
-var tinycolor = require("tinycolor2");
 var cx = require("classnames");
+var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
 
 var SwatchItem = React.createClass({
 
-  render: function() {
-    var color = tinycolor(this.props.color);
-    var styles = { backgroundColor : color.toRgbString() };
+  mixins : [PureRenderMixin],
 
+  render: function() {
     var classes = cx("swatch-item", { "swatch-selected" : this.props.selected });
 
     return (
-      <button className={classes} style={styles} onClick={this.handleClick}>
-        {color.toRgbString()}
-      </button>
+      <button 
+        className={classes}
+        style={{ backgroundColor : this.props.color }}
+        onClick={this.handleClick}
+      />
     );
   },
 
   handleClick : function(e) {
     e.preventDefault();
-    this.props.onClick(this.props.color);
+    this.props.onClick(this.props.id);
   }
 
 });
 
 
 var ColorSwatch = React.createClass({
+
+  mixins : [PureRenderMixin],
 
   getDefaultProps: function() {
     return {
@@ -47,7 +50,8 @@ var ColorSwatch = React.createClass({
       <SwatchItem
         color={color}
         key={i}
-        onClick={this.props.onSelect.bind(null, i)}
+        id={i}
+        onClick={this.props.onSelect}
         selected={this.props.selected === i}
       />
     );

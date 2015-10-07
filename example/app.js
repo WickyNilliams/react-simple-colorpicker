@@ -3,18 +3,12 @@ var ColorPicker = require("../lib/");
 var ColorSwatch = require("./ColorSwatch");
 var colors = require("./colors.json");
 
-function values(obj) {
-  return Object.keys(obj).map(function(key) {
-    return obj[key];
-  });
-}
-
 
 var App = React.createClass({
 
   getInitialState: function() {
     return {
-      colors : values(colors),
+      colors : colors,
       selected : 0
     };
   },

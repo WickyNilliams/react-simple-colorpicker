@@ -19,26 +19,24 @@ body {
  */
 
 .colorpicker {
-  color: #fff;
-  background: #333;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+  position: relative;
+  width: 14em;
+  height: 13em;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0.25em;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
 .map {
   position: absolute;
   top: 1em;
   bottom: 1em;
+  right: 2em;
   left: 1em;
-  width: 80%;
-  user-select: none;
   overflow: hidden;
-
-  .with-opacity-slider & {
-    bottom: 3em;
-  }
+  user-select: none;
+  border-radius: 0.25em;
 
   &.active {
     cursor: none;
@@ -91,15 +89,6 @@ body {
 
 }
 
-.sample {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20%;
-  height: 50%;
-  background: #bcb83e;
-}
-
 .slider {
   position: absolute;
   user-select: none;
@@ -116,8 +105,8 @@ body {
       top: 0;
       bottom: 0;
       left: 50%;
-      width: 6px;
-      margin-left: -3px;
+      width: 8px;
+      margin-left: -4px;
     }
   }
 
@@ -133,8 +122,8 @@ body {
       left: 0;
       right: 0;
       top: 50%;
-      height: 6px;
-      margin-top: -3px;
+      height: 8px;
+      margin-top: -4px;
     }
   }
 
@@ -147,42 +136,22 @@ body {
     position: absolute;
     bottom: 50%;
     left: 50%;
-    width: 14px;
-    height: 14px;
-    background: #ddd;
-    margin-left: -7px;
-    margin-bottom: -7px;
-    border-radius: 14px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-bottom: -8px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #ccc,0 1px 2px #ccc;
   }
 
-}
-
-.sat-slider {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  height: 10%;
-  width: 40%
-}
-
-.light-slider {
-  position: absolute;
-  top: 10%;
-  bottom: 0;
-  left: 0;
-  width: 10%;
 }
 
 .hue-slider {
   position: absolute;
   top: 1em;
   bottom: 1em;
-  left: 85%;
-  width: 10%;
-
-  .with-opacity-slider & {
-    bottom: 3em;
-  }
+  right: 1.3em;
 
   .track {
     background: linear-gradient(to bottom,
@@ -204,13 +173,11 @@ body {
 
 .opacity-slider {
   position: absolute;
-  top: auto;
-  bottom: 1.5em;
+  bottom: 1.3em;
   left: 1em;
-  width: 80%;
+  right: 2em;
 
   .slider {
-
     background: #fff url('data:image/gif;base64,R0lGODdhEAAQAPEAAMvLy8zMzP///wAAACwAAAAAEAAQAEACHYxvosstCAEMrq6Jj812Y59NIDQipdY5XLWqH4sVADs=') repeat;
     background-size: 8px 8px;
     height: 8px;
@@ -227,34 +194,16 @@ body {
 
 }
 
-.details {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 60%;
-  width: 30%;
+.with-opacity-slider {
+  height: 14em;
 
-  ul {
-    padding: 0;
-    margin: 0 0 20px 0;
-
-    li {
-      list-style-type: none;
-    }
+  .map {
+    bottom: 2em;
   }
 
-  label {
-    color: #888;
+  .hue-slider {
+    bottom: 2em;
   }
-
-  .value {
-    color: #ccc;
-  }
-
-  .hex {
-    text-transform: uppercase;
-  }
-
 }
 
 @mixin clearfix {
@@ -275,20 +224,6 @@ body {
   height: 20em;
 }
 
-// .picker {
-//   position: absolute;
-//   top : 1em;
-//   height: 300px;
-//   left: 1em;
-//   right: 1em;
-// }
-// .picker-left {
-//   right: 50%;
-// }
-// .picker-right {
-//   left: 50%;
-// }
-
 @media (min-width:50em) {
   .picker {
     width: 50%;
@@ -306,34 +241,29 @@ body {
 }
 
 .swatch-item {
-  width: 80px;
-  height: 80px;
-  margin: 5px;
+  width: 50px;
+  height: 50px;
   float: left;
-  outline: 1px solid rgba(0,0,0,0.25);
   border: none;
-  font-size: 12px;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  transition: -webkit-transform 0.1s;
+  -webkit-transition: -webkit-transform 0.1s;
   transition: transform 0.1s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   position: relative;
-}
+  outline: none;
 
-.swatch-dark {
-  color : #fff;
-}
-.swatch-light {
-  color : #000;
-}
+  &:focus {
+    -webkit-transform : scale(1.05);
+    transform : scale(1.05);
+    z-index: 5;
+    border-radius: 3px;
+  }
 
-.swatch-item:focus {
-  outline: 1px solid rgba(0,0,0,0.75);
-}
-
-.swatch-item.swatch-selected {
-  transform : scale(1.1);
-  -webkit-transform : scale(1.1);
-  outline: 2px solid rgba(0,0,0,0.75);
-  z-index: 10;
+  &.swatch-selected {
+    -webkit-transform : scale(1.1) !important;
+    transform : scale(1.1) !important;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    z-index: 10 !important;
+  }
 }
