@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var ColorPicker = require("../lib/");
 var ColorSwatch = require("./ColorSwatch");
 var colors = require("./colors.json");
@@ -48,5 +49,4 @@ var App = React.createClass({
 
 });
 
-React.initializeTouchEvents(true);
-React.render(<App />, document.body);
+ReactDOM.render(<App />, document.querySelector("#app"));
