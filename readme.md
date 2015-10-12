@@ -37,6 +37,5 @@ var App = React.createClass({
 
 });
 
-React.render(<App initialColor="rgb(0,0,0,1)" />, document.body);
+React.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#app"));
 ```
-
