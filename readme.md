@@ -13,8 +13,9 @@ npm install react-simple-colorpicker --save
 ## Usage
 
 ```javascript
-var React = require('react');
-var ColorPicker = require('react-simple-colorpicker');
+var React = require("react");
+var ReactDOM = require("react-dom");
+var ColorPicker = require("react-simple-colorpicker");
 
 var App = React.createClass({
 
@@ -37,7 +38,7 @@ var App = React.createClass({
 
 });
 
-React.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#app"));
+ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#app"));
 ```
 
 ## Changelog
