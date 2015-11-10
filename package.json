@@ -30,11 +30,13 @@
     "url": "https://github.com/WickyNilliams/react-simple-colorpicker/issues"
   },
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
-  "dependencies": {
-    "classnames": "^2.1.3",
-    "pure-color": "^1.0.0",
+  "peerDependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
+  },
+  "dependencies": {
+    "classnames": "^2.1.3",
+    "pure-color": "^1.0.0"
   },
   "devDependencies": {
     "envify": "^3.0.0",
@@ -45,6 +47,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-env": "^0.4.1",
     "grunt-react": "^0.10.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "reactify": "^0.17.1"
   }
 }
