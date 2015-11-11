@@ -1,22 +1,23 @@
 require("./screen.scss");
-var React = require("react");
-var ReactDOM = require("react-dom");
-var ColorPicker = require("../../src/");
-var ColorSwatch = require("./ColorSwatch");
-var colors = require("./colors.json");
+
+import React from "react";
+import ReactDOM from "react-dom";
+import ColorPicker from "../../src/";
+import ColorSwatch from "./ColorSwatch";
+import colors from "./colors.json";
 
 
-var App = React.createClass({
+const App = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       colors : colors,
       selected : 0
     };
   },
 
-  render: function() {
-    var selectedColor = this.state.colors[this.state.selected];
+  render() {
+    const selectedColor = this.state.colors[this.state.selected];
 
     return (
       <div>
@@ -38,14 +39,14 @@ var App = React.createClass({
     );
   },
 
-  handleColorSelect : function(i) {
-    this.setState({ selected : i });
+  handleColorSelect(selected) {
+    this.setState({ selected });
   },
 
-  handleColorChange : function(color) {
-    var colors = this.state.colors.slice();
+  handleColorChange(color) {
+    const colors = [...this.state.colors];
     colors[this.state.selected] = color;
-    this.setState({ colors : colors });
+    this.setState({ colors });
   }
 
 });

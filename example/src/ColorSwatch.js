@@ -1,24 +1,25 @@
-var React = require("react");
-var cx = require("classnames");
-var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
+import React from "react";
+import cx from "classnames";
+import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
 
-var SwatchItem = React.createClass({
+const SwatchItem = React.createClass({
 
   mixins : [PureRenderMixin],
 
-  render: function() {
-    var classes = cx("swatch-item", { "swatch-selected" : this.props.selected });
+  render() {
+    const classes = cx("swatch-item", { "swatch-selected" : this.props.selected });
+    const backgroundColor = this.props.color;
 
     return (
       <button 
         className={classes}
-        style={{ backgroundColor : this.props.color }}
+        style={{ backgroundColor }}
         onClick={this.handleClick}
       />
     );
   },
 
-  handleClick : function(e) {
+  handleClick(e) {
     e.preventDefault();
     this.props.onClick(this.props.id);
   }
@@ -26,18 +27,18 @@ var SwatchItem = React.createClass({
 });
 
 
-var ColorSwatch = React.createClass({
+const ColorSwatch = React.createClass({
 
   mixins : [PureRenderMixin],
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       colors : [],
       selected : null
     };
   },
 
-  render: function() {
+  render() {
     return (
       <div className="swatch">
         {this.props.colors.map(this.buildSwatch)}
@@ -45,7 +46,7 @@ var ColorSwatch = React.createClass({
     );
   },
 
-  buildSwatch : function(color, i) {
+  buildSwatch(color, i) {
     return (
       <SwatchItem
         color={color}
@@ -59,4 +60,4 @@ var ColorSwatch = React.createClass({
 
 });
 
-module.exports = ColorSwatch;
+export default ColorSwatch;

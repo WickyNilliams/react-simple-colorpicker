@@ -1,1 +1,2 @@
-module.exports = require("./components/ColorPicker");
+import ColorPicker from "./components/ColorPicker";
+export default ColorPicker;

@@ -1,11 +1,11 @@
-var React = require("react");
-var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
-var cx = require("classnames");
-var Map = require("./Map");
-var Slider = require("./Slider");
-var ColorUtils = require("../util/ColorUtils");
+import React from "react";
+import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
+import cx from "classnames";
+import Map from "./Map";
+import Slider from "./Slider";
+import * as ColorUtils from "../util/ColorUtils";
 
-var ColorPicker = React.createClass({
+const ColorPicker = React.createClass({
 
   mixins : [PureRenderMixin],
 
@@ -14,36 +14,38 @@ var ColorPicker = React.createClass({
     onChange : React.PropTypes.func.isRequired
   },
 
-  getDefaultProps : function() {
+  getDefaultProps() {
     return {
       color : "rgba(0,0,0,1)",
       opacitySlider : false
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return this.getStateFrom(this.props);
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    var nextState = this.getStateFrom(nextProps);
+  componentWillReceiveProps(nextProps) {
+    const nextState = this.getStateFrom(nextProps);
 
     if (!ColorUtils.equals(this.state.color, nextState.color)) {
       this.setState(nextState);
     }
   },
 
-  getStateFrom : function(props) {
+  getStateFrom(props) {
     return {
       color : ColorUtils.parseToHsv(props.color)
     };
   },
 
-  render: function () {
-    var classes = cx("colorpicker", { "with-opacity-slider" : this.props.opacitySlider });
+  render() {
+    const classes = cx("colorpicker", { "with-opacity-slider" : this.props.opacitySlider });
+    const [hue, saturation, value] = this.state.color;
+    let opacitySlider;
 
     if (this.props.opacitySlider) {
-      var opacitySlider = (
+      opacitySlider = (
         <div className="opacity-slider">
           <Slider
             vertical={false}
@@ -61,15 +63,15 @@ var ColorPicker = React.createClass({
         <div className="hue-slider">
           <Slider
             vertical={true}
-            value={this.state.color[0]}
+            value={hue}
             max={360}
             onChange={this.handleHueChange}
           />
         </div>
         {opacitySlider}
         <Map
-          x={this.state.color[1]}
-          y={this.state.color[2]}
+          x={saturation}
+          y={value}
           max={100}
           className={ColorUtils.isDark(this.state.color) ? "dark" : "light"}
           backgroundColor={this.getBackgroundHue()}
@@ -79,44 +81,42 @@ var ColorPicker = React.createClass({
     );
   },
 
-  getAlpha : function() {
+  getAlpha() {
     return this.state.color[3] === undefined ? 1 : this.state.color[3];
   },
 
-  getBackgroundGradient: function() {
-    var c = this.state.color;
+  getBackgroundGradient() {
+    const [h, s, v] = this.state.color;
+    const opaque = ColorUtils.toRgbString([h, s, v, 1]);
+    const transparent = ColorUtils.toRgbString([h, s, v, 0])
 
-    return (
-      "linear-gradient(to right, " +
-      ColorUtils.toRgbString([c[0], c[1], c[2], 0]) + " 0%, " +
-      ColorUtils.toRgbString([c[0], c[1], c[2], 1]) + " 100%)"
-    );
+    return `linear-gradient(to right, ${transparent} 0%, ${opaque} 100%)`;
   },
 
-  getBackgroundHue : function() {
+  getBackgroundHue() {
     return ColorUtils.toRgbString([this.state.color[0], 100, 100]);
   },
 
-  handleAlphaChange : function(alpha) {
-    var c = this.state.color;
-    this.update([c[0], c[1], c[2], alpha]);
+  handleAlphaChange(alpha) {
+    const [h, s, v] = this.state.color;
+    this.update([h, s, v, alpha]);
   },
 
-  handleHueChange : function(hue) {
-    var c = this.state.color;
-    this.update([hue, c[1], c[2], c[3]]);
+  handleHueChange(hue) {
+    const [h, s, v, a] = this.state.color;
+    this.update([hue, s, v, a]);
   },
 
-  handleSaturationValueChange : function(saturation, value) {
-    var c = this.state.color;
-    this.update([c[0], saturation, value, c[3]]);
+  handleSaturationValueChange(saturation, value) {
+    const [h, s, v, a] = this.state.color;
+    this.update([h, saturation, value, a]);
   },
 
-  update : function(color) {
-    this.props.onChange(ColorUtils.toRgbString(color));
+  update(color) {
     this.setState({ color : color });
+    this.props.onChange(ColorUtils.toRgbString(color));
   }
 
 });
 
-module.exports = ColorPicker;
+export default ColorPicker;

@@ -1,10 +1,10 @@
-var React = require("react");
-var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
-var cx = require("classnames");
-var DraggableMixin = require("./DraggableMixin");
+import React from "react";
+import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
+import cx from "classnames";
+import DraggableMixin from "./DraggableMixin";
 
 
-var Slider = React.createClass({
+const Slider = React.createClass({
 
   mixins : [DraggableMixin, PureRenderMixin],
 
@@ -14,7 +14,7 @@ var Slider = React.createClass({
     background : React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       value : 0,
       vertical : false,
@@ -22,9 +22,9 @@ var Slider = React.createClass({
     };
   },
 
-  updatePosition : function(clientX, clientY) {
-    var rect = this.getBoundingRect();
-    var value;
+  updatePosition(clientX, clientY) {
+    const rect = this.getBoundingRect();
+    let value;
 
     if (this.props.vertical) {
       value = (rect.bottom - clientY) / rect.height;
@@ -37,15 +37,17 @@ var Slider = React.createClass({
     );
   },
 
-  getCss: function () {
-    var obj = {};
-    var attr = this.props.vertical ? "bottom" : "left";
-    obj[attr] = this.getPercentageValue(this.props.value);
-    return obj;
+  getCss() {
+    const attr = this.props.vertical ? "bottom" : "left";
+
+    return {
+      [attr] : this.getPercentageValue(this.props.value)
+    };
   },
 
-  render: function () {
-    var classes = cx("slider", (this.props.vertical ? "vertical" : "horizontal"));
+  render() {
+    const classes = cx("slider", (this.props.vertical ? "vertical" : "horizontal"));
+    const background = this.props.background;
     
     return (
       <div
@@ -53,7 +55,7 @@ var Slider = React.createClass({
         onMouseDown={this.startUpdates}
         onTouchStart={this.startUpdates}
       >
-        <div className="track" style={{ background : this.props.background }} />
+        <div className="track" style={{ background }} />
         <div className="pointer" style={this.getCss()} />
       </div>
     );
@@ -61,4 +63,4 @@ var Slider = React.createClass({
 
 });
 
-module.exports = Slider;
+export default Slider;

@@ -1,10 +1,10 @@
-var React = require("react");
-var PureRenderMixin = require("react/lib/ReactComponentWithPureRenderMixin");
-var cx = require("classnames");
-var DraggableMixin = require("./DraggableMixin");
+import React from "react";
+import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
+import cx from "classnames";
+import DraggableMixin from "./DraggableMixin";
 
 
-var Map = React.createClass({
+const Map = React.createClass({
 
   mixins : [DraggableMixin, PureRenderMixin],
 
@@ -15,7 +15,7 @@ var Map = React.createClass({
     className : React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       x : 0,
       y : 0,
@@ -24,11 +24,11 @@ var Map = React.createClass({
     };
   },
 
-  updatePosition : function(clientX, clientY) {
-    var rect = this.getBoundingRect();
+  updatePosition(clientX, clientY) {
+    const rect = this.getBoundingRect();
 
-    var x = (clientX - rect.left) / rect.width;
-    var y = (rect.bottom - clientY) / rect.height;
+    const x = (clientX - rect.left) / rect.width;
+    const y = (rect.bottom - clientY) / rect.height;
 
     this.props.onChange(
       this.getScaledValue(x),
@@ -36,8 +36,9 @@ var Map = React.createClass({
     );
   },
 
-  render: function () {
-    var classes = cx("map", this.props.className, { active : this.state.active });
+  render() {
+    const classes = cx("map", this.props.className, { active : this.state.active });
+    const backgroundColor = this.props.backgroundColor;
 
     return (
       <div
@@ -45,9 +46,7 @@ var Map = React.createClass({
         onMouseDown={this.startUpdates}
         onTouchStart={this.startUpdates}
       >
-        <div className="background" style={{
-          backgroundColor: this.props.backgroundColor
-        }} />
+        <div className="background" style={{ backgroundColor }} />
         <div className="pointer" style={{
           left: this.getPercentageValue(this.props.x),
           bottom: this.getPercentageValue(this.props.y)
@@ -58,4 +57,4 @@ var Map = React.createClass({
 
 });
 
-module.exports = Map;
+export default Map;
