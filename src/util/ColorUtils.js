@@ -2,15 +2,7 @@ var parse = require("pure-color/parse");
 var rgb2hsv = require("pure-color/convert/rgb2hsv");
 var hsv2rgb = require("pure-color/convert/hsv2rgb");
 var rgb2string = require("pure-color/convert/rgb2string");
-var hsv2hsl = require("pure-color/convert/hsv2hsl");
-
-function rgb2grayscale (rgb) {
-  return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
-}
-
-function hsv2grayscale(hsv) {
-  return rgb2grayscale(hsv2rgb(hsv));
-}
+var rgb2grayscale = require("pure-color/convert/rgb2grayscale");
 
 var ColorUtils = {
 

@@ -1,6 +1,7 @@
+require("./screen.scss");
 var React = require("react");
 var ReactDOM = require("react-dom");
-var ColorPicker = require("../lib/");
+var ColorPicker = require("../../src/");
 var ColorSwatch = require("./ColorSwatch");
 var colors = require("./colors.json");
 
