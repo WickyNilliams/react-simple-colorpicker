@@ -8,10 +8,13 @@
     "umd"
   ],
   "scripts": {
-    "build": "NODE_ENV=production babel -d lib/ src/",
-    "build:umd": "NODE_ENV=production webpack -p src/index.js umd/index.js",
+    "build": "npm run build:umd && npm run build:es5",
+    "build:umd": "NODE_ENV=production webpack src/index.js umd/index.js",
+    "build:es5" : "NODE_ENV=production babel -d lib/ src/",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version" : "npm run build",
+    "postversion" : "git push origin master --tags && npm publish"
   },
   "repository": {
     "type": "git",
