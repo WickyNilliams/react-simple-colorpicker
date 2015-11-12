@@ -1,4 +1,11 @@
-var webpack = require("webpack")
+var webpack = require("webpack");
+var pkg = require("./package");
+
+var BANNER = [
+  pkg.name + " " + pkg.version + " - " + pkg.description,
+  "Copyright (c) " + new Date().getFullYear() + " " + pkg.author.name + " - " + pkg.homepage,
+  "Licensed under the " + pkg.license + " license"
+].join("\n");
 
 module.exports = {
 
@@ -36,7 +43,17 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress : {
+        unsafe : true,
+        screw_ie8 : true
+      },
+      output : {
+        comments : false
+      }
+    }),
+    new webpack.BannerPlugin(BANNER)
   ]
 
 };
