@@ -2,7 +2,7 @@
   "name": "react-simple-colorpicker",
   "version": "1.2.0",
   "description": "Colorpicker for React",
-  "main": "pkg/index.js",
+  "main": "lib/index.js",
   "files": [
     "lib",
     "umd"
