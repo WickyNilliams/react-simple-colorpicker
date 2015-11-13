@@ -1,1 +1,2 @@
-export { default } from "./components/ColorPicker";
+import ColorPicker from "./components/ColorPicker";
+module.exports = ColorPicker;
