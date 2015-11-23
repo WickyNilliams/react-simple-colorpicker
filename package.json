@@ -10,12 +10,12 @@
   "scripts": {
     "build": "npm run build:umd && npm run build:es5",
     "build:umd": "NODE_ENV=production webpack src/index.js umd/index.js",
-    "build:es5" : "NODE_ENV=production babel -d lib/ src/",
-    "build:example" : "NODE_ENV=development webpack --config webpack.dev.config.js",
+    "build:es5": "NODE_ENV=production babel -d lib/ src/",
+    "build:example": "NODE_ENV=development webpack --config webpack.dev.config.js",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "version" : "npm run build",
-    "postversion" : "git push origin master --tags && npm publish"
+    "version": "npm run build",
+    "postversion": "git push origin master --tags && npm publish"
   },
   "repository": {
     "type": "git",
@@ -45,23 +45,23 @@
     "react-dom": "^0.14.0"
   },
   "dependencies": {
-    "classnames": "^2.1.3",
-    "pure-color": "^1.0.0"
+    "classnames": "^2.2.0",
+    "pure-color": "^1.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.1.2",
-    "babel-loader": "^6.1.0",
-    "babel-preset-es2015": "^6.1.2",
-    "babel-preset-react": "^6.1.2",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
     "css-loader": "^0.22.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "json-loader": "^0.5.3",
-    "node-sass": "^3.4.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "sass-loader": "^3.1.1",
+    "node-sass": "^3.4.2",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.4",
+    "webpack": "^1.12.8",
     "webpack-dev-server": "^1.12.1"
   }
 }
