@@ -11,6 +11,7 @@
     "build": "npm run build:umd && npm run build:es5",
     "build:umd": "NODE_ENV=production webpack src/index.js umd/index.js",
     "build:es5" : "NODE_ENV=production babel -d lib/ src/",
+    "build:example" : "NODE_ENV=development webpack --config webpack.dev.config.js",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline",
     "test": "echo \"Error: no test specified\" && exit 1",
     "version" : "npm run build",
