@@ -1,8 +1,8 @@
-const parse = require("pure-color/parse");
-const rgb2hsv = require("pure-color/convert/rgb2hsv");
-const hsv2rgb = require("pure-color/convert/hsv2rgb");
-const rgb2string = require("pure-color/convert/rgb2string");
-const rgb2grayscale = require("pure-color/convert/rgb2grayscale");
+import parse from "pure-color/parse";
+import rgb2hsv from "pure-color/convert/rgb2hsv";
+import hsv2rgb from "pure-color/convert/hsv2rgb";
+import rgb2string from "pure-color/convert/rgb2string";
+import rgb2grayscale from "pure-color/convert/rgb2grayscale";
 
 
 export function parseToHsv(color) {
