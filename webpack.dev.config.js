@@ -16,7 +16,7 @@ module.exports = {
     path: path.join(__dirname, 'example', 'dist'), // Must be an absolute path
     filename: 'bundle.js'
   },
-  
+
   module: {
     loaders: [
       {
@@ -44,6 +44,7 @@ module.exports = {
   ],
 
   devServer : {
-    contentBase: "example/dist/"
+    contentBase: "example/dist/",
+    "host": "0.0.0.0"
   }
 };
