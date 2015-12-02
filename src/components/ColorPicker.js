@@ -42,24 +42,10 @@ const ColorPicker = React.createClass({
   render() {
     const classes = cx("colorpicker", { "with-opacity-slider" : this.props.opacitySlider });
     const [hue, saturation, value] = this.state.color;
-    let opacitySlider;
-
-    if (this.props.opacitySlider) {
-      opacitySlider = (
-        <div className="opacity-slider">
-          <Slider
-            vertical={false}
-            value={this.getAlpha()}
-            max={1}
-            background={this.getBackgroundGradient()}
-            onChange={this.handleAlphaChange}
-          />
-        </div>
-      );
-    }
 
     return (
       <div className={classes}>
+
         <div className="hue-slider">
           <Slider
             vertical={true}
@@ -68,7 +54,19 @@ const ColorPicker = React.createClass({
             onChange={this.handleHueChange}
           />
         </div>
-        {opacitySlider}
+
+        {this.props.opacitySlider && (
+          <div className="opacity-slider">
+            <Slider
+              vertical={false}
+              value={this.getAlpha()}
+              max={1}
+              background={this.getBackgroundGradient()}
+              onChange={this.handleAlphaChange}
+            />
+          </div>
+        )}
+
         <Map
           x={saturation}
           y={value}
@@ -77,6 +75,7 @@ const ColorPicker = React.createClass({
           backgroundColor={this.getBackgroundHue()}
           onChange={this.handleSaturationValueChange}
         />
+
       </div>
     );
   },
@@ -88,9 +87,8 @@ const ColorPicker = React.createClass({
   getBackgroundGradient() {
     const [h, s, v] = this.state.color;
     const opaque = ColorUtils.toRgbString([h, s, v, 1]);
-    const transparent = ColorUtils.toRgbString([h, s, v, 0])
 
-    return `linear-gradient(to right, ${transparent} 0%, ${opaque} 100%)`;
+    return `linear-gradient(to right, rgba(0,0,0,0) 0%, ${opaque} 100%)`;
   },
 
   getBackgroundHue() {
@@ -103,12 +101,12 @@ const ColorPicker = React.createClass({
   },
 
   handleHueChange(hue) {
-    const [h, s, v, a] = this.state.color;
+    const [, s, v, a] = this.state.color;
     this.update([hue, s, v, a]);
   },
 
   handleSaturationValueChange(saturation, value) {
-    const [h, s, v, a] = this.state.color;
+    const [h, , , a] = this.state.color;
     this.update([h, saturation, value, a]);
   },
 

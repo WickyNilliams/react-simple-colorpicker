@@ -25,20 +25,23 @@ const DraggableMixin = {
   },
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateBoundingRect);
+    window.addEventListener("scroll", this.updateBoundingRect);
+
+    this.updateBoundingRect();
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateBoundingRect);
+    window.removeEventListener("scroll", this.updateBoundingRect);
+  },
+
+  startUpdates(e) {
     document.addEventListener("mousemove", this.handleUpdate);
     document.addEventListener("touchmove", this.handleUpdate);
     document.addEventListener("mouseup", this.stopUpdates);
     document.addEventListener("touchend", this.stopUpdates);
-  },
 
-  componentWillUnmount() {
-    document.removeEventListener("mousemove", this.handleUpdate);
-    document.removeEventListener("touchmove", this.handleUpdate);
-    document.removeEventListener("mouseup", this.stopUpdates);
-    document.removeEventListener("touchend", this.stopUpdates);
-  },
-
-  startUpdates(e) {
     e.preventDefault();
     const { x, y } = this.getPosition(e);
     this.setState({ active : true });
@@ -55,11 +58,16 @@ const DraggableMixin = {
 
   stopUpdates() {
     if(this.state.active) {
+      document.removeEventListener("mousemove", this.handleUpdate);
+      document.removeEventListener("touchmove", this.handleUpdate);
+      document.removeEventListener("mouseup", this.stopUpdates);
+      document.removeEventListener("touchend", this.stopUpdates);
+
       this.setState({ active : false });
     }
   },
 
-  getPosition : function(e) {
+  getPosition(e) {
     if(e.touches) {
       e = e.touches[0];
     }
@@ -70,16 +78,17 @@ const DraggableMixin = {
     };
   },
 
-  getBoundingRect : function() {
-    return ReactDOM.findDOMNode(this).getBoundingClientRect();
-  },
-
-  getPercentageValue : function(value) {
+  getPercentageValue(value) {
     return (value / this.props.max) * 100 + "%";
   },
 
-  getScaledValue : function(value) {
+  getScaledValue(value) {
     return clamp(value, 0, 1) * this.props.max;
+  },
+
+  updateBoundingRect() {
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+    this.setState({ rect });
   }
 
 };

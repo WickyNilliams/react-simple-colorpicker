@@ -23,7 +23,7 @@ const Slider = React.createClass({
   },
 
   updatePosition(clientX, clientY) {
-    const rect = this.getBoundingRect();
+    const { rect } = this.state;
     let value;
 
     if (this.props.vertical) {
@@ -48,7 +48,7 @@ const Slider = React.createClass({
   render() {
     const classes = cx("slider", (this.props.vertical ? "vertical" : "horizontal"));
     const background = this.props.background;
-    
+
     return (
       <div
         className={classes}
@@ -56,7 +56,7 @@ const Slider = React.createClass({
         onTouchStart={this.startUpdates}
       >
         <div className="track" style={{ background }} />
-        <div className="pointer" style={this.getCss()} />
+        {this.state.rect && <div className="pointer" style={this.getCss()} />}
       </div>
     );
   }
