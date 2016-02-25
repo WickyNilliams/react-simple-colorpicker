@@ -19,15 +19,15 @@ var ColorPicker = require("react-simple-colorpicker");
 
 var App = React.createClass({
 
-  getInitialState: function() {
+  getInitialState : function() {
     return {
       color : this.props.initialColor
     };
   },
 
-  render: function() {
+  render : function() {
     return (
-      <ColorPicker color={this.state.color} onChange={this.handleChange} opacitySlider={true} />
+      <ColorPicker color={this.state.color} onChange={this.handleChange} opacitySlider />
     );
   },
 
@@ -42,6 +42,14 @@ ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#ap
 ```
 
 ## Changelog
+
+### v1.3.0
+
+* `react` and `react-dom` now peer dependencies (fixes #9)
+* Performance improvements
+* Will now work if rendered into an iframe from another document
+* Switch to webpack
+* Add release script
 
 ### v1.2.0
 
