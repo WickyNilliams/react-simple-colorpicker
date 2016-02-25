@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import clamp from "../util/clamp";
 
 function noop() {}
+const getDocument = element => element.ownerDocument;
 
 const DraggableMixin = {
 
@@ -25,6 +26,9 @@ const DraggableMixin = {
   },
 
   componentDidMount() {
+    this.document = getDocument(ReactDOM.findDOMNode(this));
+    const window  = this.window = this.document.defaultView;
+
     window.addEventListener("resize", this.updateBoundingRect);
     window.addEventListener("scroll", this.updateBoundingRect);
 
@@ -32,11 +36,14 @@ const DraggableMixin = {
   },
 
   componentWillUnmount() {
+    const { window } = this;
     window.removeEventListener("resize", this.updateBoundingRect);
     window.removeEventListener("scroll", this.updateBoundingRect);
   },
 
   startUpdates(e) {
+    const { document } = this;
+
     document.addEventListener("mousemove", this.handleUpdate);
     document.addEventListener("touchmove", this.handleUpdate);
     document.addEventListener("mouseup", this.stopUpdates);
@@ -58,6 +65,8 @@ const DraggableMixin = {
 
   stopUpdates() {
     if(this.state.active) {
+      const { document } = this;
+
       document.removeEventListener("mousemove", this.handleUpdate);
       document.removeEventListener("touchmove", this.handleUpdate);
       document.removeEventListener("mouseup", this.stopUpdates);
