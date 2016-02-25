@@ -4,11 +4,24 @@
 
 A fork of [react-colorpicker](https://github.com/stayradiated/react-colorpicker), but with the extra stuff removed.
 
+## Why?
+
+* Improved performance
+* Smaller file size (only 3.8kb gzipped)
+* Easily composed into more complex color pickers (e.g. see [example/src](example directory))
+* Bug fixes
+
 ## Install
+
+Via npm:
 
 ```bash
 npm install react-simple-colorpicker --save
 ```
+
+Or if you want a UMD-compatible served from a CDN:
+
+`https://npmcdn.com/react-simple-colorpicker/umd/index.js`
 
 ## Usage
 
