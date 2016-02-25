@@ -21,7 +21,7 @@ npm install react-simple-colorpicker --save
 
 Or if you want a UMD-compatible served from a CDN:
 
-`https://npmcdn.com/react-simple-colorpicker/umd/index.js`
+[https://npmcdn.com/react-simple-colorpicker/umd/index.js](https://npmcdn.com/react-simple-colorpicker/umd/index.js)
 
 ## Usage
 
