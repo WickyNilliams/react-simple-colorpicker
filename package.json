@@ -1,5 +1,5 @@
 {
-  "name": "react-simple-colorpicker",
+  "name": "@musicglue/react-simple-colorpicker",
   "version": "1.3.0",
   "description": "Colorpicker for React",
   "main": "lib/index.js",

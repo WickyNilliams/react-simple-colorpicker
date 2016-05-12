@@ -50,6 +50,7 @@ const DraggableMixin = {
     document.addEventListener("touchend", this.stopUpdates);
 
     e.preventDefault();
+    this.updateBoundingRect();
     const { x, y } = this.getPosition(e);
     this.setState({ active : true });
     this.updatePosition(x, y);
@@ -58,6 +59,7 @@ const DraggableMixin = {
   handleUpdate(e) {
     if (this.state.active) {
       e.preventDefault();
+      this.updateBoundingRect();
       const { x, y } = this.getPosition(e);
       this.updatePosition(x, y);
     }
@@ -71,6 +73,7 @@ const DraggableMixin = {
       document.removeEventListener("touchmove", this.handleUpdate);
       document.removeEventListener("mouseup", this.stopUpdates);
       document.removeEventListener("touchend", this.stopUpdates);
+      this.updateBoundingRect();
 
       this.setState({ active : false });
     }
