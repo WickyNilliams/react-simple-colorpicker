@@ -15,6 +15,15 @@ export function parseToHsv(color) {
   return hsv;
 }
 
+export function parseToRgb(color) {
+  const rgb = parse(color);
+
+  const alpha = color.length === 4 ? color[3] : 1;
+  rgb.push(alpha);
+
+  return rgb;
+}
+
 export function toRgbString(hsv) {
   const rgb = hsv2rgb(hsv);
 

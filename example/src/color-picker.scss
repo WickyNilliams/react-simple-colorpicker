@@ -11,7 +11,7 @@
 .map {
   position: absolute;
   top: 1em;
-  bottom: 1em;
+  bottom: 2em;
   right: 2em;
   left: 1em;
   overflow: hidden;
@@ -155,7 +155,7 @@
 
 .opacity-slider {
   position: absolute;
-  bottom: 1.3em;
+  bottom: 2.3em;
   left: 1em;
   right: 2em;
 
@@ -180,10 +180,36 @@
   height: 14em;
 
   .map {
-    bottom: 2em;
+    bottom: 3em;
   }
 
   .hue-slider {
-    bottom: 2em;
+    bottom: 3em;
   }
+}
+
+.direct-color-input {
+  position: absolute;
+  bottom: .4em;
+  left: 1em;
+  display: flex;
+  font-family: 'arial';
+}
+
+.direct-color-input-input {
+  background-color: 0;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-size: 1rem;
+  font-family: 'arial';
+  max-width: 100px;
+}
+
+.direct-color-input-label_end,
+.direct-color-input-label_start {
+  font-size: 1rem;
+}
+
+.direct-color-input-label_start {
+
 }

@@ -22,7 +22,9 @@ const ColorPicker = React.createClass({
   },
 
   getInitialState() {
-    return this.getStateFrom(this.props);
+    const initialState = this.getStateFrom(this.props);
+    initialState.value = ColorUtils.parseToRgb(this.props.color);
+    return initialState;
   },
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +37,7 @@ const ColorPicker = React.createClass({
 
   getStateFrom(props) {
     return {
-      color : ColorUtils.parseToHsv(props.color)
+      color : ColorUtils.parseToHsv(props.color),
     };
   },
 
@@ -76,6 +78,20 @@ const ColorPicker = React.createClass({
           onChange={this.handleSaturationValueChange}
         />
 
+        <div className="direct-color-input">
+          <div className="direct-color-input-label_start">
+            {this.props.opacitySlider ? 'rgba(' : 'rgb('}
+          </div>
+          <input
+            type="text"
+            inputMode="text"
+            className="direct-color-input-input"
+            value={this.state.value}
+            onChange={this.handleDirectChange}
+          />
+          <div className="direct-color-input-label_end">)</div>
+        </div>
+
       </div>
     );
   },
@@ -95,6 +111,18 @@ const ColorPicker = React.createClass({
     return ColorUtils.toRgbString([this.state.color[0], 100, 100]);
   },
 
+  handleDirectChange({ target: { value } }) {
+    const color = ColorUtils.parseToHsv(`rgba(${value})`);
+    const complete = color.filter(c => !isNaN(c)).length === 4;
+
+    if (complete) {
+      this.setState({ value, color });
+      this.props.onChange(ColorUtils.toRgbString(color));
+    } else {
+      this.setState({ value });
+    }
+  },
+
   handleAlphaChange(alpha) {
     const [h, s, v] = this.state.color;
     this.update([h, s, v, alpha]);
@@ -111,7 +139,7 @@ const ColorPicker = React.createClass({
   },
 
   update(color) {
-    this.setState({ color : color });
+    this.setState({ color });
     this.props.onChange(ColorUtils.toRgbString(color));
   }
 
