@@ -47,24 +47,20 @@ const DraggableMixin = {
   },
 
   handleUpdate(e) {
-    if (this.state.active) {
-      e.preventDefault();
-      const { x, y } = this.getPosition(e);
-      this.updatePosition(this.rect, x, y);
-    }
+    e.preventDefault();
+    const { x, y } = this.getPosition(e);
+    this.updatePosition(this.rect, x, y);
   },
 
   stopUpdates() {
-    if(this.state.active) {
-      const { document } = this;
+    const { document } = this;
 
-      document.removeEventListener("mousemove", this.handleUpdate);
-      document.removeEventListener("touchmove", this.handleUpdate);
-      document.removeEventListener("mouseup", this.stopUpdates);
-      document.removeEventListener("touchend", this.stopUpdates);
+    document.removeEventListener("mousemove", this.handleUpdate);
+    document.removeEventListener("touchmove", this.handleUpdate);
+    document.removeEventListener("mouseup", this.stopUpdates);
+    document.removeEventListener("touchend", this.stopUpdates);
 
-      this.setState({ active : false });
-    }
+    this.setState({ active : false });
   },
 
   getPosition(e) {
