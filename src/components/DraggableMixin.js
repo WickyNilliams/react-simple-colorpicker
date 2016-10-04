@@ -27,18 +27,7 @@ const DraggableMixin = {
 
   componentDidMount() {
     this.document = getDocument(ReactDOM.findDOMNode(this));
-    const window  = this.window = this.document.defaultView;
-
-    window.addEventListener("resize", this.updateBoundingRect);
-    window.addEventListener("scroll", this.updateBoundingRect);
-
-    this.updateBoundingRect();
-  },
-
-  componentWillUnmount() {
-    const { window } = this;
-    window.removeEventListener("resize", this.updateBoundingRect);
-    window.removeEventListener("scroll", this.updateBoundingRect);
+    this.rect = this.getBoundingRect();
   },
 
   startUpdates(e) {
@@ -51,15 +40,17 @@ const DraggableMixin = {
 
     e.preventDefault();
     const { x, y } = this.getPosition(e);
+
+    this.rect = this.getBoundingRect();
     this.setState({ active : true });
-    this.updatePosition(x, y);
+    this.updatePosition(this.rect, x, y);
   },
 
   handleUpdate(e) {
     if (this.state.active) {
       e.preventDefault();
       const { x, y } = this.getPosition(e);
-      this.updatePosition(x, y);
+      this.updatePosition(this.rect, x, y);
     }
   },
 
@@ -95,9 +86,8 @@ const DraggableMixin = {
     return clamp(value, 0, 1) * this.props.max;
   },
 
-  updateBoundingRect() {
-    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    this.setState({ rect });
+  getBoundingRect() {
+    return ReactDOM.findDOMNode(this).getBoundingClientRect();
   }
 
 };
