@@ -56,6 +56,10 @@ ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#ap
 
 ## Changelog
 
+### v1.4.0
+
+* Upgrade to react v15
+
 ### v1.3.0
 
 * `react` and `react-dom` now peer dependencies (fixes #9)
