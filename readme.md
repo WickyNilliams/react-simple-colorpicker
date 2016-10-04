@@ -56,6 +56,11 @@ ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#ap
 
 ## Changelog
 
+### v1.4.1
+
+* Improve performance
+* Fix dragging inside elements with `overflow: scroll` (fixes #17)
+
 ### v1.4.0
 
 * Upgrade to react v15
