@@ -4,3 +4,4 @@ umd
 example/dist
 !example/dist/index.html
 npm-debug.log
+.idea/
