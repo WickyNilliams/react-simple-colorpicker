@@ -1,6 +1,6 @@
 {
   "name": "react-simple-colorpicker",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Colorpicker for React",
   "main": "lib/index.js",
   "files": [
@@ -12,7 +12,7 @@
     "build:umd": "NODE_ENV=production webpack src/index.js umd/index.js",
     "build:es5": "NODE_ENV=production babel -d lib/ src/",
     "build:example": "NODE_ENV=development webpack --config webpack.dev.config.js",
-    "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline",
+    "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline --host 0.0.0.0 --port 3000",
     "test": "echo \"Error: no test specified\" && exit 1",
     "version": "npm run build",
     "postversion": "git push origin master --tags && npm publish"
@@ -42,7 +42,9 @@
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react-dom": "^0.14.0 || ^15.0.0",
+    "prop-types": "^15.5.8",
+    "create-react-class": "^15.5.2"
   },
   "dependencies": {
     "classnames": "^2.2.0",

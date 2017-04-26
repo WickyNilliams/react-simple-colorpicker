@@ -1,13 +1,14 @@
 require("./app.scss");
 
 import React from "react";
+import createReactClass from 'create-react-class';
 import ReactDOM from "react-dom";
 import ColorPicker from "../../src/";
 import ColorSwatch from "./ColorSwatch";
 import colors from "./colors.json";
 
 
-const App = React.createClass({
+const App = createReactClass({
 
   getInitialState() {
     return {

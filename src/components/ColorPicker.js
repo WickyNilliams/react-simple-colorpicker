@@ -1,17 +1,20 @@
 import React from "react";
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
+
 import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
 import cx from "classnames";
 import Map from "./Map";
 import Slider from "./Slider";
 import * as ColorUtils from "../util/ColorUtils";
 
-const ColorPicker = React.createClass({
+const ColorPicker = createReactClass({
 
   mixins : [PureRenderMixin],
 
   propTypes: {
-    color : React.PropTypes.string.isRequired,
-    onChange : React.PropTypes.func.isRequired
+    color : PropTypes.string.isRequired,
+    onChange : PropTypes.func.isRequired
   },
 
   getDefaultProps() {

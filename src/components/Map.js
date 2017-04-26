@@ -1,18 +1,20 @@
 import React from "react";
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
 import cx from "classnames";
 import DraggableMixin from "./DraggableMixin";
 
 
-const Map = React.createClass({
+const Map = createReactClass({
 
   mixins : [DraggableMixin, PureRenderMixin],
 
   propTypes: {
-    x : React.PropTypes.number.isRequired,
-    y : React.PropTypes.number.isRequired,
-    backgroundColor : React.PropTypes.string,
-    className : React.PropTypes.string
+    x : PropTypes.number.isRequired,
+    y : PropTypes.number.isRequired,
+    backgroundColor : PropTypes.string,
+    className : PropTypes.string
   },
 
   getDefaultProps() {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ReactDOM from "react-dom";
 import clamp from "../util/clamp";
 
@@ -8,8 +9,8 @@ const getDocument = element => element.ownerDocument;
 const DraggableMixin = {
 
   propTypes: {
-    onChange : React.PropTypes.func.isRequired,
-    max : React.PropTypes.number
+    onChange : PropTypes.func.isRequired,
+    max : PropTypes.number
   },
 
   getDefaultProps() {
