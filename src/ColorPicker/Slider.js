@@ -1,67 +1,123 @@
 import React from "react";
-import createReactClass from 'create-react-class';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
-import cx from "classnames";
-import DraggableMixin from "./DraggableMixin";
+import classNames from 'classnames';
+
+import clamp from "./util/clamp";
 
 
-const Slider = createReactClass({
+export default class Slider extends React.Component {
 
-  mixins : [DraggableMixin, PureRenderMixin],
+	static propTypes = {
+		value: PropTypes.number.isRequired,
+		background : PropTypes.string
+	};
 
-  propTypes: {
-    value: PropTypes.number.isRequired,
-    vertical: PropTypes.bool,
-    background : PropTypes.string
-  },
+	static defaultProps = {
+		value : 0,
+		background : '',
+		className: null
+	};
 
-  getDefaultProps() {
-    return {
-      value : 0,
-      vertical : false,
-      background : ""
-    };
-  },
+	constructor(props)
+	{
+		super();
 
-  updatePosition(rect, clientX, clientY) {
-    let value;
+		this._self = null;
+		this.onHandleUpdate = this.handleUpdate.bind(this);
+		this.onStopUpdates = this.stopUpdates.bind(this);
+	}
 
-    if (this.props.vertical) {
-      value = (rect.bottom - clientY) / rect.height;
-    } else {
-      value = (clientX - rect.left) / rect.width;
-    }
+	getPosition(e)
+	{
+		if (e.touches)
+		{
+			e = e.touches[0];
+		}
+		return { x : e.clientX, y : e.clientY };
+	}
 
-    this.props.onChange(
-      this.getScaledValue(value)
-    );
-  },
+	getPercentageValue(value)
+	{
+		const { props } = this;
+		return `${(value / props.max) * 100}%`;
+	}
 
-  getCss() {
-    const attr = this.props.vertical ? "bottom" : "left";
+	updatePosition(rect, clientX, clientY)
+	{
+		const { props } = this;
+		props.onChange(this.getScaledValue((clientX - rect.left) / rect.width));
+	}
 
-    return {
-      [attr] : this.getPercentageValue(this.props.value)
-    };
-  },
+	getScaledValue(value)
+	{
+		return clamp(value, 0, 1) * this.props.max;
+	}
 
-  render() {
-    const classes = cx("slider", (this.props.vertical ? "vertical" : "horizontal"));
-    const background = this.props.background;
+	getCss()
+	{
+		const { props } = this;
 
-    return (
-      <div
-        className={classes}
-        onMouseDown={this.startUpdates}
-        onTouchStart={this.startUpdates}
-      >
-        <div className="track" style={{ background }} />
-        <div className="pointer" style={this.getCss()} />
-      </div>
-    );
-  }
+		return {
+			left: this.getPercentageValue(props.value)
+		};
+	}
 
-});
+	startUpdates(e)
+	{
+		e.preventDefault();
 
-export default Slider;
+		document.addEventListener('mousemove', this.onHandleUpdate);
+		document.addEventListener('touchmove', this.onHandleUpdate);
+		document.addEventListener('mouseup', this.onStopUpdates);
+		document.addEventListener('touchend', this.onStopUpdates);
+
+		const { x, y } = this.getPosition(e);
+
+		this.rect = this.getBoundingRect();
+		this.setState({ active : true });
+		this.updatePosition(this.rect, x, y);
+	}
+
+	getBoundingRect()
+	{
+		return ReactDOM.findDOMNode(this._self).getBoundingClientRect();
+	}
+
+	handleUpdate(e) {
+		e.preventDefault();
+
+		const { x, y } = this.getPosition(e);
+		this.updatePosition(this.rect, x, y);
+	}
+
+	stopUpdates()
+	{
+		document.removeEventListener("mousemove", this.onHandleUpdate);
+		document.removeEventListener("touchmove", this.onHandleUpdate);
+		document.removeEventListener("mouseup", this.onStopUpdates);
+		document.removeEventListener("touchend", this.onStopUpdates);
+
+		this.setState({ active : false });
+	}
+
+	render()
+	{
+		const { props } = this;
+		const background = this.props.background;
+
+		return (
+			<div
+				ref={(r) => { this._self = r; }}
+				className={classNames('slider', props.className)}
+				onMouseDown={this.startUpdates.bind(this)}
+				onTouchStart={this.startUpdates.bind(this)}>
+				<div className="track">
+					<span style={{ background }} />
+				</div>
+				<div className="pointer" style={this.getCss()} />
+			</div>
+		);
+	}
+
+}

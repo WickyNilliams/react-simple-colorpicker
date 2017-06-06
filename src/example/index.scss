@@ -1,4 +1,4 @@
-@import "../ColorPicker/css/index.scss";
+@import "../ColorPicker/index.scss";
 
 
 body {
@@ -9,9 +9,7 @@ body {
 }
 
 .demo {
-	&__picker {
-		border: 1px solid lime;
-	}
+	&__picker {}
 
 	&__colors {
 		margin: 30px 0 0;

@@ -23,7 +23,7 @@ class App extends React.Component {
 
 	_onClickItem(selected)
 	{
-		this.setState({ selected });
+		this.setState({ selected: selected });
 	}
 
 	handleColorChange(color)
@@ -43,14 +43,9 @@ class App extends React.Component {
 			<div className="demo">
 				<div className="demo__picker">
 					<ColorPicker
-						color="123"
-						onChange={() => {}}
-					/>
-					{/*<ColorPicker*/}
-					{/*color={selectedColor}*/}
-					{/*opacitySlider={true}*/}
-					{/*onChange={this.handleColorChange}*/}
-					{/*/>*/}
+						color={selectedColor}
+						opacitySlider={true}
+						onChange={this.handleColorChange.bind(this)}/>
 				</div>
 
 				<div className="demo__colors">

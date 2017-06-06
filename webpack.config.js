@@ -12,7 +12,7 @@ const config = (env) => {
 		context: resolve(__dirname, 'src'),
 
 		entry: {
-			photoLayoutEditor: ifProd(
+			reactSimpleColorPicker: ifProd(
 				[ './ColorPicker/index.js' ],
 				[ './example/index.js' ]
 			)
@@ -68,13 +68,6 @@ const config = (env) => {
 							'sass-loader'
 						]
 					)
-				},
-				{
-					test: /\.(jpg|png)$/,
-					loader: 'file-loader',
-					options: {
-						name: 'assets/images/[name].[ext]',
-					},
 				},
 			]
 		},

@@ -1,0 +1,133 @@
+.colorpicker {
+	&, * {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	position: relative;
+	background-color: #fff;
+	border: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+
+	.map {
+		position: relative;
+		user-select: none;
+		min-height: 120px;
+
+		&.active {
+			cursor: none;
+		}
+
+		&.dark .pointer {
+			border-color: #fff;
+		}
+
+		&.light .pointer {
+			border-color: #000;
+		}
+
+		.pointer {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			margin-left: -5px;
+			margin-bottom: -5px;
+			border-radius: 100%;
+			border: 1px solid #000;
+			will-change: left, bottom;
+		}
+
+		.background {
+			top: 0;
+			left: 0;
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+
+		.background:before,
+		.background:after {
+			display: block;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+
+		.background:after {
+			background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+		}
+
+		.background:before {
+			background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+		}
+
+	}
+
+	.controller {
+		padding: 0 10px;
+	}
+
+	.slider {
+		$size-pointer: 16px;
+		$size-bar: 10px;
+
+		position: relative;
+		user-select: none;
+		cursor: ew-resize;
+		padding: 5px 0;
+
+		.track {
+			position: relative;
+			background: #888;
+			border-radius: 1px;
+			span {
+				display: block;
+				height: $size-bar;
+			}
+		}
+		.pointer {
+			position: absolute;
+			bottom: 50%;
+			left: 50%;
+			width: $size-pointer;
+			height: $size-pointer;
+			margin-left: -#{$size-pointer * .5};
+			margin-bottom: -#{$size-pointer * .5};
+			border-radius: 50%;
+			background: #fff;
+			box-shadow: 0 1px 2px #ccc;
+			will-change: left;
+		}
+
+		&-hue {
+			.track {
+				background: linear-gradient(to right,
+					#FF0000 0%,
+					#FF0099 10%,
+					#CD00FF 20%,
+					#3200FF 30%,
+					#0066FF 40%,
+					#00FFFD 50%,
+					#00FF66 60%,
+					#35FF00 70%,
+					#CDFF00 80%,
+					#FF9900 90%,
+					#FF0000 100%
+				);
+			}
+		}
+		&-opacity {
+			.track {
+				background: #fff url('data:image/gif;base64,R0lGODdhEAAQAPEAAMvLy8zMzP///wAAACwAAAAAEAAQAEACHYxvosstCAEMrq6Jj812Y59NIDQipdY5XLWqH4sVADs=') repeat;
+				background-size: 8px 8px;
+				span {
+					background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFF 100%);
+				}
+			}
+		}
+	}
+}
