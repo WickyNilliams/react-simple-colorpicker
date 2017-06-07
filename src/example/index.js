@@ -44,7 +44,7 @@ class App extends React.Component {
 				<div className="demo__picker">
 					<ColorPicker
 						color={selectedColor}
-						opacitySlider={true}
+						//paletteColors={[]}
 						onChange={this.handleColorChange.bind(this)}/>
 				</div>
 

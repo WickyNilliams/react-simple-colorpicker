@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import Slider from "./Slider";
 import Map from "./Map";
+import Palette from './Palette';
 
 import * as ColorUtils from "./util/ColorUtils";
 
@@ -16,8 +17,26 @@ export default class ColorPicker extends React.Component {
 	};
 
 	static defaultProps = {
-		color : "rgba(0,0,0,1)",
-		opacitySlider : false
+		color: "rgba(0,0,0,1)",
+		onChange: (color) => {},
+		paletteColors: [
+			[208, 2, 27, 1],
+			'#F6A623',
+			[248, 231, 28, 1],
+			'#8B572A',
+			'#7ED321',
+			'#417505',
+			'#BD0FE1',
+			'#9012FE',
+			'#4990E2',
+			'#50E3C2',
+			'#B8E986',
+			'#000000',
+			'#4A4A4A',
+			'#9B9B9B',
+			'#FFFFFF',
+			'#B31F37'
+		],
 	};
 
 	constructor(props)
@@ -100,7 +119,7 @@ export default class ColorPicker extends React.Component {
 		const [ hue, saturation, value ] = state.color;
 
 		return (
-			<div className={classNames('colorpicker', { 'with-opacity-slider' : props.opacitySlider })}>
+			<div className="colorpicker">
 				<Map
 					x={saturation}
 					y={value}
@@ -108,22 +127,27 @@ export default class ColorPicker extends React.Component {
 					className={ColorUtils.isDark(this.state.color) ? "dark" : "light"}
 					backgroundColor={this.getBackgroundHue()}
 					onChange={this.handleSaturationValueChange.bind(this)}/>
-				<div className="controller">
-					<Slider
-						value={hue}
-						max={360}
-						onChange={this.handleHueChange.bind(this)}
-						className="slider-hue"/>
-
-					{props.opacitySlider && (
+				<div className="colorpicker__body">
+					<nav className="colorpicker__controller">
+						<Slider
+							value={hue}
+							max={360}
+							onChange={this.handleHueChange.bind(this)}
+							className="colorpicker__slider slider-hue"/>
 						<Slider
 							value={this.getAlpha()}
 							max={1}
 							background={this.getBackgroundGradient()}
 							onChange={this.handleAlphaChange.bind(this)}
-							className="slider-opacity"/>
-					)}
+							className="colorpicker__slider slider-opacity"/>
+					</nav>
+					<figure className="colorpicker__preview">
+						<span>
+							<i style={{ backgroundColor: ColorUtils.toRgbString(state.color) }}/>
+						</span>
+					</figure>
 				</div>
+				<Palette colors={props.paletteColors} className="colorpicker__palette"/>
 			</div>
 		);
 	}

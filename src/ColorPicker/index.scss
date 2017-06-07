@@ -1,3 +1,9 @@
+%bg-transparent {
+	background: #fff url('data:image/gif;base64,R0lGODdhEAAQAPEAAMvLy8zMzP///wAAACwAAAAAEAAQAEACHYxvosstCAEMrq6Jj812Y59NIDQipdY5XLWqH4sVADs=') repeat;
+	background-size: 8px 8px;
+}
+
+
 .colorpicker {
 	&, * {
 		-webkit-box-sizing: border-box;
@@ -8,21 +14,21 @@
 	position: relative;
 	background-color: #fff;
 	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 
 	.map {
 		position: relative;
 		user-select: none;
-		min-height: 120px;
+		//min-height: 120px;
+		padding-top: 56.25%;
 
 		&.active {
 			cursor: none;
 		}
-
 		&.dark .pointer {
 			border-color: #fff;
 		}
-
 		&.light .pointer {
 			border-color: #000;
 		}
@@ -67,66 +73,92 @@
 
 	}
 
-	.controller {
+	&__body {
+		padding: 5px 0;
+		display: flex;
+		align-items: center;
+	}
+	&__controller {
+		flex: 1;
+		padding: 0 0 0 10px;
+		//padding: 10px 15px 10px;
+	}
+	&__preview {
+		margin: 0;
 		padding: 0 10px;
+		> span {
+			@extend %bg-transparent;
+			position: relative;
+			display: block;
+			margin: 0 auto;
+			width: 28px;
+			height: 28px;
+			border-radius: 2px;
+			overflow: hidden;
+			> i {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: #ccc;
+			}
+		}
 	}
 
 	.slider {
-		$size-pointer: 16px;
+		$size-pointer-width: 6px;
+		$size-pointer-height: 10px;
 		$size-bar: 10px;
 
 		position: relative;
 		user-select: none;
 		cursor: ew-resize;
-		padding: 5px 0;
+		padding: 4px 0;
 
-		.track {
+		&__track {
 			position: relative;
 			background: #888;
-			border-radius: 1px;
+			border-radius: 2px;
+			overflow: hidden;
 			span {
 				display: block;
 				height: $size-bar;
 			}
 		}
-		.pointer {
+		&__pointer {
 			position: absolute;
 			bottom: 50%;
 			left: 50%;
-			width: $size-pointer;
-			height: $size-pointer;
-			margin-left: -#{$size-pointer * .5};
-			margin-bottom: -#{$size-pointer * .5};
-			border-radius: 50%;
+			width: $size-pointer-width;
+			height: $size-pointer-height;
+			margin-left: -#{$size-pointer-width * .5};
+			margin-bottom: -#{$size-pointer-height * .5};
+			border-radius: 1px;
 			background: #fff;
-			box-shadow: 0 1px 2px #ccc;
+			box-shadow: 0 0 1px 1px rgba(0,0,0,.4);
 			will-change: left;
 		}
 
-		&-hue {
-			.track {
-				background: linear-gradient(to right,
-					#FF0000 0%,
-					#FF0099 10%,
-					#CD00FF 20%,
-					#3200FF 30%,
-					#0066FF 40%,
-					#00FFFD 50%,
-					#00FF66 60%,
-					#35FF00 70%,
-					#CDFF00 80%,
-					#FF9900 90%,
-					#FF0000 100%
-				);
-			}
+		&-hue .slider__track {
+			background: linear-gradient(to left,
+				#FF0000 0%,
+				#FF0099 10%,
+				#CD00FF 20%,
+				#3200FF 30%,
+				#0066FF 40%,
+				#00FFFD 50%,
+				#00FF66 60%,
+				#35FF00 70%,
+				#CDFF00 80%,
+				#FF9900 90%,
+				#FF0000 100%
+			);
 		}
-		&-opacity {
-			.track {
-				background: #fff url('data:image/gif;base64,R0lGODdhEAAQAPEAAMvLy8zMzP///wAAACwAAAAAEAAQAEACHYxvosstCAEMrq6Jj812Y59NIDQipdY5XLWqH4sVADs=') repeat;
-				background-size: 8px 8px;
-				span {
-					background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFF 100%);
-				}
+		&-opacity .slider__track {
+			@extend %bg-transparent;
+			span {
+				background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFF 100%);
 			}
 		}
 	}

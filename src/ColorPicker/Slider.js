@@ -24,6 +24,7 @@ export default class Slider extends React.Component {
 		super();
 
 		this._self = null;
+		this.rect = null;
 		this.onHandleUpdate = this.handleUpdate.bind(this);
 		this.onStopUpdates = this.stopUpdates.bind(this);
 	}
@@ -43,7 +44,7 @@ export default class Slider extends React.Component {
 		return `${(value / props.max) * 100}%`;
 	}
 
-	updatePosition(rect, clientX, clientY)
+	updatePosition(rect, clientX)
 	{
 		const { props } = this;
 		props.onChange(this.getScaledValue((clientX - rect.left) / rect.width));
@@ -51,7 +52,8 @@ export default class Slider extends React.Component {
 
 	getScaledValue(value)
 	{
-		return clamp(value, 0, 1) * this.props.max;
+		const { props } = this;
+		return clamp(value, 0, 1) * props.max;
 	}
 
 	getCss()
@@ -74,9 +76,9 @@ export default class Slider extends React.Component {
 
 		const { x, y } = this.getPosition(e);
 
-		this.rect = this.getBoundingRect();
+		this._rect = this.getBoundingRect();
 		this.setState({ active : true });
-		this.updatePosition(this.rect, x, y);
+		this.updatePosition(this._rect, x, y);
 	}
 
 	getBoundingRect()
@@ -88,7 +90,7 @@ export default class Slider extends React.Component {
 		e.preventDefault();
 
 		const { x, y } = this.getPosition(e);
-		this.updatePosition(this.rect, x, y);
+		this.updatePosition(this._rect, x, y);
 	}
 
 	stopUpdates()
@@ -104,7 +106,7 @@ export default class Slider extends React.Component {
 	render()
 	{
 		const { props } = this;
-		const background = this.props.background;
+		const background = props.background;
 
 		return (
 			<div
@@ -112,10 +114,10 @@ export default class Slider extends React.Component {
 				className={classNames('slider', props.className)}
 				onMouseDown={this.startUpdates.bind(this)}
 				onTouchStart={this.startUpdates.bind(this)}>
-				<div className="track">
+				<div className="slider__track">
 					<span style={{ background }} />
 				</div>
-				<div className="pointer" style={this.getCss()} />
+				<div className="slider__pointer" style={this.getCss()} />
 			</div>
 		);
 	}

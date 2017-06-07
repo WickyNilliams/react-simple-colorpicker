@@ -9,7 +9,9 @@ body {
 }
 
 .demo {
-	&__picker {}
+	&__picker {
+		max-width: 280px;
+	}
 
 	&__colors {
 		margin: 30px 0 0;
