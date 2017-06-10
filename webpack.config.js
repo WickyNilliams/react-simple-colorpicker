@@ -12,7 +12,7 @@ const config = (env) => {
 		context: resolve(__dirname, 'src'),
 
 		entry: {
-			reactSimpleColorPicker: ifProd(
+			ColorPicker: ifProd(
 				[ './ColorPicker/index.js' ],
 				[ './example/index.js' ]
 			)
@@ -31,7 +31,7 @@ const config = (env) => {
 			publicPath: './',
 			filename: ifProd('[name].js', '[name].js'),
 			chunkFilename: ifProd('[name].js', '[name].js'),
-			library: 'reactSimpleColorPicker',
+			library: 'ColorPicker',
 			libraryTarget: ifProd('umd', 'var'),
 		},
 
@@ -75,7 +75,7 @@ const config = (env) => {
 		plugins: removeEmpty([
 			ifProd(
 				new webpack.optimize.CommonsChunkPlugin({
-					name: 'reactSimpleColorPicker.vendor',
+					name: 'ColorPicker.vendor',
 					minChunks: function (module) {
 						return (
 							module.context && module.context.indexOf('node_modules') !== -1
