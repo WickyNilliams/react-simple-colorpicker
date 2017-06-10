@@ -5,10 +5,16 @@ import rgb2string from "pure-color/convert/rgb2string";
 import rgb2grayscale from "pure-color/convert/rgb2grayscale";
 
 
+/**
+ * convert to hsv color type
+ *
+ * @param {String} color
+ * @return {Array}
+ */
 export function parseToHsv(color)
 {
 	color = parse(color);
-	const hsv  = rgb2hsv(color);
+	const hsv = rgb2hsv(color);
 
 	const alpha = color.length === 4 ? color[3] : 1;
 	hsv.push(alpha);
@@ -16,6 +22,12 @@ export function parseToHsv(color)
 	return hsv;
 }
 
+/**
+ * convert HSV to RGB
+ *
+ * @param {Array} hsv
+ * @return {String}
+ */
 export function toRgbString(hsv)
 {
 	const rgb = hsv2rgb(hsv);
@@ -28,11 +40,24 @@ export function toRgbString(hsv)
 	return rgb2string(rgb);
 }
 
+/**
+ * equals
+ *
+ * @param {Array} hsv1
+ * @param {Array} hsv2
+ * @return {Boolean}
+ */
 export function equals(hsv1, hsv2)
 {
 	return toRgbString(hsv1) === toRgbString(hsv2);
 }
 
+/**
+ * is darkness tone
+ *
+ * @param {Array} hsv
+ * @return {Boolean}
+ */
 export function isDark(hsv)
 {
 	return rgb2grayscale(hsv2rgb(hsv)) <= 128;

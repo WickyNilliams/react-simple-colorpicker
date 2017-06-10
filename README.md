@@ -11,50 +11,64 @@ A fork of [react-colorpicker](https://github.com/stayradiated/react-colorpicker)
 * Easily composed into more complex color pickers (e.g. see [example/src](example directory))
 * Bug fixes
 
+
 ## Install
 
 Via npm:
 
 ```bash
 npm install react-simple-colorpicker --save
+yarn add https://github.com/RedgooseDev/react-simple-colorpicker
 ```
 
-Or if you want a UMD-compatible served from a CDN:
-
-[https://unpkg.com/react-simple-colorpicker/umd/index.js](https://unpkg.com/react-simple-colorpicker/umd/index.js)
 
 ## Usage
 
+### javascript
+
 ```javascript
-var React = require("react");
-var ReactDOM = require("react-dom");
-var ColorPicker = require("react-simple-colorpicker");
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ColorPicker from 'react-simple-colorpicker';
 
-var App = React.createClass({
+class App extends React.Component {
 
-  getInitialState : function() {
-    return {
-      color : this.props.initialColor
-    };
-  },
+	constructor(props) {
+		super();
 
-  render : function() {
-    return (
-      <ColorPicker color={this.state.color} onChange={this.handleChange} opacitySlider />
-    );
-  },
+		this.state = {
+			color : props.initialColor
+		};
+	}
 
-  handleChange : function(color) {
-    console.log(color); // color is rgb(a) string
-    this.setState({ color : color });
-  }
+	render() {
+		return (
+			<ColorPicker
+				color={this.state.color}
+				onChange={(color) => this.setState({ color: color })}
+				//paletteColors={[]}
+			/>
+		);
+	}
+}
 
-});
-
-ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#app"));
+ReactDOM.render(<App initialColor="#ffffff" />, document.querySelector("#app"));
 ```
 
+### scss
+
+```scss
+
+```
+
+
 ## Changelog
+
+### v1.5.0
+
+* Design and code refactoring
+* Add color Palette
+* Support v1.5.x higher react version
 
 ### v1.4.1
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import ColorSwatch from './ColorSwatch';
 import ColorPicker from '../ColorPicker';
+
 import './index.scss';
 
 
@@ -44,9 +45,12 @@ class App extends React.Component {
 				<div className="demo__picker">
 					<ColorPicker
 						color={selectedColor}
+						onChange={this.handleColorChange.bind(this)}
 						//paletteColors={[]}
-						onChange={this.handleColorChange.bind(this)}/>
+					/>
 				</div>
+
+				<hr/>
 
 				<div className="demo__colors">
 					<ColorSwatch

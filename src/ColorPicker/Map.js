@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import clamp from "./util/clamp";
+import * as lib from "./lib";
 
 
 export default class Map extends React.Component {
@@ -32,35 +32,54 @@ export default class Map extends React.Component {
 
 		this._self = null;
 		this._rect = null;
-		this.onHandleUpdate = this._onHandleUpdate.bind(this);
+		this.onHandleUpdate = this._onUpdate.bind(this);
 		this.onStopUpdates = this._onStopUpdates.bind(this);
 	}
 
+	/**
+	 * update position
+	 *
+	 * @param {ClientRect} rect
+	 * @param {Number} clientX
+	 * @param {Number} clientY
+	 */
 	updatePosition(rect, clientX, clientY)
 	{
-		const { props } = this;
 		const x = (clientX - rect.left) / rect.width;
 		const y = (rect.bottom - clientY) / rect.height;
 
-		props.onChange(
+		this.props.onChange(
 			this.getScaledValue(x),
 			this.getScaledValue(y)
 		);
 	}
 
+	/**
+	 * get scaled value
+	 *
+	 * @param {Number} value
+	 */
 	getScaledValue(value)
 	{
-		const { props } = this;
-
-		return clamp(value, 0, 1) * props.max;
+		return lib.util.clamp(value, 0, 1) * this.props.max;
 	}
 
+	/**
+	 * get percentage value
+	 *
+	 * @param {Number} value
+	 * @return {String}
+	 */
 	getPercentageValue(value)
 	{
-		const { props } = this;
-		return `${(value / props.max) * 100}%`;
+		return `${(value / this.props.max) * 100}%`;
 	}
 
+	/**
+	 * get position
+	 *
+	 * @param {Event} e
+	 */
 	getPosition(e)
 	{
 		if (e.touches)
@@ -70,42 +89,65 @@ export default class Map extends React.Component {
 		return { x : e.clientX, y : e.clientY };
 	}
 
+	/**
+	 * get bounding rect
+	 *
+	 * @return {ClientRect}
+	 */
 	getBoundingRect()
 	{
 		return ReactDOM.findDOMNode(this._self).getBoundingClientRect();
 	}
 
+	/**
+	 * on start updates
+	 *
+	 * @param {Event} e
+	 */
 	_onStartUpdates(e)
 	{
 		e.preventDefault();
 
+		// set x,y position
+		const { x, y } = this.getPosition(e);
+
+		// set element
+		this._rect = this.getBoundingRect();
+
+		// set mouse|touch event
 		document.addEventListener('mousemove', this.onHandleUpdate);
 		document.addEventListener('touchmove', this.onHandleUpdate);
 		document.addEventListener('mouseup', this.onStopUpdates);
 		document.addEventListener('touchend', this.onStopUpdates);
 
-		const { x, y } = this.getPosition(e);
-
-		this._rect = this.getBoundingRect();
 		this.setState({ active : true });
 		this.updatePosition(this._rect, x, y);
 	}
 
-	_onHandleUpdate(e) {
-		e.preventDefault();
-
-		const { x, y } = this.getPosition(e);
-		this.updatePosition(this._rect, x, y);
-	}
-
+	/**
+	 * on stop updates
+	 */
 	_onStopUpdates()
 	{
+		// unset mouse|touch event
 		document.removeEventListener("mousemove", this.onHandleUpdate);
 		document.removeEventListener("touchmove", this.onHandleUpdate);
 		document.removeEventListener("mouseup", this.onStopUpdates);
 		document.removeEventListener("touchend", this.onStopUpdates);
 
 		this.setState({ active : false });
+	}
+
+	/**
+	 * on update
+	 *
+	 * @param {Event} e
+	 */
+	_onUpdate(e) {
+		e.preventDefault();
+
+		const { x, y } = this.getPosition(e);
+		this.updatePosition(this._rect, x, y);
 	}
 
 	render()

@@ -9,12 +9,16 @@ body {
 }
 
 .demo {
+
+	> hr {
+		margin: 30px 0;
+	}
+
 	&__picker {
-		max-width: 280px;
+		//max-width: 280px;
 	}
 
 	&__colors {
-		margin: 30px 0 0;
 		.swatch-item {
 			width: 50px;
 			height: 50px;

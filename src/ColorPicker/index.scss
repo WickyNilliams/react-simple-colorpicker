@@ -5,6 +5,7 @@
 
 
 .colorpicker {
+	width: 220px;
 	&, * {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -102,6 +103,59 @@
 				top: 0;
 				bottom: 0;
 				background: #ccc;
+			}
+		}
+	}
+	&__palette {
+		padding: 10px;
+		border-top: 1px solid #f1f1f1;
+		ul {
+			margin: -4px;
+			padding: 0;
+			list-style: none;
+			font-size: 0;
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+		}
+		li {
+			display: block;
+			float: left;
+			width: 12.5%;
+			padding: 5px;
+		}
+		div {
+			position: relative;
+			padding-top: 100%;
+		}
+		button {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			display: block;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+			text-indent: -9999px;
+			border-radius: 2px;
+			cursor: pointer;
+			&:focus {
+				outline: thin dotted #666;
+			}
+			&:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				border: 1px solid rgba(0,0,0,.08);
+				border-radius: 2px;
 			}
 		}
 	}
