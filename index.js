@@ -1,0 +1,1 @@
+module.exports.ColorPicker = require('./src/ColorPicker').default;
