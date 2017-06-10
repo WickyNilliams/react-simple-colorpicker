@@ -58,7 +58,7 @@ ReactDOM.render(<App initialColor="#ffffff" />, document.querySelector("#app"));
 ### scss
 
 ```scss
-
+@import '~react-simple-colorpicker/src/ColorPicker/index.scss';
 ```
 
 
