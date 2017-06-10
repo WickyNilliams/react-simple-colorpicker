@@ -35,7 +35,7 @@ const config = (env) => {
 			libraryTarget: ifProd('umd', 'var'),
 		},
 
-		devtool: ifProd('cheap-module-map', 'cheap-eval-source-map'),
+		devtool: ifProd('source-map', 'cheap-eval-source-map'),
 
 		module: {
 			rules: [
