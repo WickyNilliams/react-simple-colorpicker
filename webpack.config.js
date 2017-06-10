@@ -32,10 +32,10 @@ const config = (env) => {
 			filename: ifProd('[name].js', '[name].js'),
 			chunkFilename: ifProd('[name].js', '[name].js'),
 			library: 'ColorPicker',
-			libraryTarget: ifProd('umd', 'var'),
+			libraryTarget: ifProd('umd'),
 		},
 
-		devtool: ifProd('cheap-module-source-map', 'cheap-eval-source-map'),
+		devtool: ifProd('cheap-module-map', 'cheap-eval-source-map'),
 
 		module: {
 			rules: [
