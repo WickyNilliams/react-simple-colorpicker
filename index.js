@@ -1,1 +1,1 @@
-module.exports.ColorPicker = require('./build/ColorPicker');
+module.exports.ColorPicker = require('./build/ColorPicker').default;
