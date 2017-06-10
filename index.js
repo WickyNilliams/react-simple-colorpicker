@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./dist/ColorPicker');
+module.exports = require('./build/ColorPicker');

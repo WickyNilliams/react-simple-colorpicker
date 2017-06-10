@@ -20,14 +20,14 @@ const config = (env) => {
 
 		devServer: {
 			hot: true,
-			contentBase: resolve(__dirname, 'dist'),
+			contentBase: resolve(__dirname, 'build'),
 			publicPath: '/',
 			historyApiFallback: true,
 			disableHostCheck: true
 		},
 
 		output: {
-			path: resolve(__dirname, 'dist'),
+			path: resolve(__dirname, 'build'),
 			publicPath: './',
 			filename: ifProd('[name].js', '[name].js'),
 			chunkFilename: ifProd('[name].js', '[name].js'),
