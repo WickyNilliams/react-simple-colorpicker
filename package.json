@@ -1,6 +1,6 @@
 {
   "name": "react-simple-colorpicker",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Colorpicker for React",
   "main": "index.js",
   "scripts": {
