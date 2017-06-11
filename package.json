@@ -3,10 +3,6 @@
   "version": "1.5.3",
   "description": "Colorpicker for React",
   "main": "index.js",
-  "files": [
-    "lib",
-    "umd"
-  ],
   "scripts": {
     "start": "webpack-dev-server --config webpack-dev.config.js --env=dev --host 0.0.0.0 --port 3000",
     "build": "webpack --config webpack.config.js -p --progress"
