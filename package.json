@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack-dev.config.js --env=dev --host 0.0.0.0 --port 3000",
-    "build": "webpack --config webpack.config.js -p --progress"
+    "build": "webpack --config webpack.config.js -p --progress",
+    "version-patch": "npm version patch"
   },
   "repository": {
     "type": "git",
