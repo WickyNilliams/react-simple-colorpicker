@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 
 export default class Palette extends React.Component {
@@ -56,7 +57,7 @@ export default class Palette extends React.Component {
 		const { props } = this;
 
 		return (
-			<nav className={props.className}>
+			<nav className={classNames('cpPalette', props.className)}>
 				<ul>
 					{props.colors.map(this.renderItem.bind(this))}
 				</ul>

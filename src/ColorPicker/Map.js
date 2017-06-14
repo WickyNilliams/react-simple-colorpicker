@@ -159,14 +159,16 @@ export default class Map extends React.Component {
 				ref={(r) => { this._self = r; }}
 				onMouseDown={this._onStartUpdates.bind(this)}
 				onTouchStart={this._onStartUpdates.bind(this)}
-				className={classNames('map', props.className, { active : state.active })}>
+				className={classNames('cpMap', props.className, {
+					'cpMap-active' : state.active
+				})}>
 				<div
-					className="background"
+					className="cpMap__background"
 					style={{
 						backgroundColor: props.backgroundColor
 					}}/>
 				<div
-					className="pointer"
+					className="cpMap__pointer"
 					style={{
 						left: this.getPercentageValue(this.props.x),
 						bottom: this.getPercentageValue(this.props.y)

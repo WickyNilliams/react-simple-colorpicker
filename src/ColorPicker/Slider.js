@@ -141,14 +141,14 @@ export default class Slider extends React.Component {
 		return (
 			<div
 				ref={(r) => { this._self = r; }}
-				className={classNames('slider', props.className)}
+				className={classNames('cpSlider', props.className)}
 				onMouseDown={this._onStartUpdates.bind(this)}
 				onTouchStart={this._onStartUpdates.bind(this)}>
-				<div className="slider__track">
+				<div className="cpSlider__track">
 					<span style={{ background: props.background }} />
 				</div>
 				<div
-					className="slider__pointer"
+					className="cpSlider__pointer"
 					style={{ left: this.getPercentageValue(this.props.value) }} />
 			</div>
 		);

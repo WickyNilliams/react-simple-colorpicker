@@ -14,64 +14,14 @@
 
 	position: relative;
 	background-color: #fff;
-	border: 1px solid rgba(0,0,0,0.1);
 	border-radius: 2px;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 
-	.map {
+	&__map {
 		position: relative;
 		user-select: none;
-		//min-height: 120px;
 		padding-top: 56.25%;
-
-		&.active {
-			cursor: none;
-		}
-		&.dark .pointer {
-			border-color: #fff;
-		}
-		&.light .pointer {
-			border-color: #000;
-		}
-
-		.pointer {
-			position: absolute;
-			width: 10px;
-			height: 10px;
-			margin-left: -5px;
-			margin-bottom: -5px;
-			border-radius: 100%;
-			border: 1px solid #000;
-			will-change: left, bottom;
-		}
-
-		.background {
-			top: 0;
-			left: 0;
-			position: absolute;
-			height: 100%;
-			width: 100%;
-		}
-
-		.background:before,
-		.background:after {
-			display: block;
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
-		}
-
-		.background:after {
-			background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-		}
-
-		.background:before {
-			background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-		}
-
+		//min-height: 120px;
 	}
 
 	&__body {
@@ -82,120 +32,126 @@
 	&__controller {
 		flex: 1;
 		padding: 0 0 0 10px;
-		//padding: 10px 15px 10px;
 	}
 	&__preview {
 		margin: 0;
 		padding: 0 10px;
-		> span {
-			@extend %bg-transparent;
-			position: relative;
-			display: block;
-			margin: 0 auto;
-			width: 28px;
-			height: 28px;
-			border-radius: 2px;
-			overflow: hidden;
-			> i {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				background: #ccc;
-			}
-		}
 	}
 	&__palette {
 		padding: 10px;
 		border-top: 1px solid #f1f1f1;
-		ul {
-			margin: -4px;
-			padding: 0;
-			list-style: none;
-			font-size: 0;
-			&:after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-		}
-		li {
+	}
+	&__slider {
+		padding: 4px 0;
+	}
+}
+
+
+.cpMap {
+	&-active {
+		cursor: none;
+	}
+	&-dark &__pointer {
+		border-color: #fff;
+	}
+	&-light &__pointer {
+		border-color: #000;
+	}
+
+	&__pointer {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		margin-left: -5px;
+		margin-bottom: -5px;
+		border-radius: 100%;
+		border: 1px solid #000;
+		will-change: left, bottom;
+	}
+
+	&__background {
+		top: 0;
+		left: 0;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		&:before,
+		&:after {
 			display: block;
-			float: left;
-			width: 12.5%;
-			padding: 5px;
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
 		}
-		div {
-			position: relative;
-			padding-top: 100%;
+		&:after {
+			background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
 		}
-		button {
+		&:before {
+			background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+		}
+	}
+}
+
+
+.cpPreview {
+	> span {
+		@extend %bg-transparent;
+		position: relative;
+		display: block;
+		margin: 0 auto;
+		width: 28px;
+		height: 28px;
+		border-radius: 2px;
+		overflow: hidden;
+		> i {
 			position: absolute;
 			left: 0;
 			right: 0;
 			top: 0;
 			bottom: 0;
-			display: block;
-			margin: 0;
-			width: 100%;
-			height: 100%;
-			border: none;
-			text-indent: -9999px;
-			border-radius: 2px;
-			cursor: pointer;
-			&:focus {
-				outline: thin dotted #666;
-			}
-			&:after {
-				content: '';
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				border: 1px solid rgba(0,0,0,.08);
-				border-radius: 2px;
-			}
+			background: #ccc;
 		}
 	}
+}
 
-	.slider {
-		$size-pointer-width: 6px;
-		$size-pointer-height: 10px;
-		$size-bar: 10px;
 
+.cpSlider {
+	$size-pointer-width: 6px;
+	$size-pointer-height: 10px;
+	$size-bar: 10px;
+
+	position: relative;
+	user-select: none;
+	cursor: ew-resize;
+
+	&__track {
 		position: relative;
-		user-select: none;
-		cursor: ew-resize;
-		padding: 4px 0;
-
-		&__track {
-			position: relative;
-			background: #888;
-			border-radius: 2px;
-			overflow: hidden;
-			span {
-				display: block;
-				height: $size-bar;
-			}
+		background: #888;
+		border-radius: 2px;
+		overflow: hidden;
+		span {
+			display: block;
+			height: $size-bar;
 		}
-		&__pointer {
-			position: absolute;
-			bottom: 50%;
-			left: 50%;
-			width: $size-pointer-width;
-			height: $size-pointer-height;
-			margin-left: -#{$size-pointer-width * .5};
-			margin-bottom: -#{$size-pointer-height * .5};
-			border-radius: 1px;
-			background: #fff;
-			box-shadow: 0 0 1px 1px rgba(0,0,0,.4);
-			will-change: left;
-		}
+	}
+	&__pointer {
+		position: absolute;
+		bottom: 50%;
+		left: 50%;
+		width: $size-pointer-width;
+		height: $size-pointer-height;
+		margin-left: -#{$size-pointer-width * .5};
+		margin-bottom: -#{$size-pointer-height * .5};
+		border-radius: 1px;
+		background: #fff;
+		box-shadow: 0 0 1px 1px rgba(0,0,0,.4);
+		will-change: left;
+	}
 
-		&-hue .slider__track {
-			background: linear-gradient(to left,
+	&-hue &__track {
+		background: linear-gradient(to left,
 				#FF0000 0%,
 				#FF0099 10%,
 				#CD00FF 20%,
@@ -207,13 +163,65 @@
 				#CDFF00 80%,
 				#FF9900 90%,
 				#FF0000 100%
-			);
+		);
+	}
+	&-opacity &__track {
+		@extend %bg-transparent;
+		span {
+			background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFF 100%);
 		}
-		&-opacity .slider__track {
-			@extend %bg-transparent;
-			span {
-				background: linear-gradient(to right, rgba(255,255,255,0) 0%, #FFF 100%);
-			}
+	}
+}
+
+
+.cpPalette {
+	ul {
+		margin: -4px;
+		padding: 0;
+		list-style: none;
+		font-size: 0;
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+	}
+	li {
+		display: block;
+		float: left;
+		width: 12.5%;
+		padding: 5px;
+	}
+	div {
+		position: relative;
+		padding-top: 100%;
+	}
+	button {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: block;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		text-indent: -9999px;
+		border-radius: 2px;
+		cursor: pointer;
+		&:focus {
+			outline: thin dotted #666;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			border: 1px solid rgba(0,0,0,.08);
+			border-radius: 2px;
 		}
 	}
 }
