@@ -1,21 +1,12 @@
 {
   "name": "react-simple-colorpicker",
-  "version": "1.4.1",
+  "version": "1.5.6",
   "description": "Colorpicker for React",
-  "main": "lib/index.js",
-  "files": [
-    "lib",
-    "umd"
-  ],
+  "main": "index.js",
   "scripts": {
-    "build": "npm run build:umd && npm run build:es5",
-    "build:umd": "NODE_ENV=production webpack src/index.js umd/index.js",
-    "build:es5": "NODE_ENV=production babel -d lib/ src/",
-    "build:example": "NODE_ENV=development webpack --config webpack.dev.config.js",
-    "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --inline",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "version": "npm run build",
-    "postversion": "git push origin master --tags && npm publish"
+    "start": "webpack-dev-server --config webpack-dev.config.js --env=dev --host 0.0.0.0 --port 3000",
+    "build": "webpack --config webpack.config.js -p --progress",
+    "version-patch": "npm version patch"
   },
   "repository": {
     "type": "git",
@@ -31,6 +22,9 @@
     "hsv",
     "hex"
   ],
+  "engines": {
+    "node": ">=7.8.0"
+  },
   "author": {
     "name": "Nick Williams",
     "url": "http://wicky.nillia.ms"
@@ -40,29 +34,36 @@
     "url": "https://github.com/WickyNilliams/react-simple-colorpicker/issues"
   },
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
-  },
   "dependencies": {
-    "classnames": "^2.2.0",
-    "pure-color": "^1.2.0"
+    "classnames": "^2.2.5",
+    "prop-types": "^15.5.10",
+    "pure-color": "^1.2.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.2.0",
-    "babel-core": "^6.2.1",
-    "babel-loader": "^6.2.0",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "css-loader": "^0.22.0",
-    "extract-text-webpack-plugin": "^0.9.1",
-    "json-loader": "^0.5.3",
-    "node-sass": "^3.4.2",
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0",
-    "sass-loader": "^3.1.2",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.12.8",
-    "webpack-dev-server": "^1.12.1"
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chunk-manifest-webpack-plugin": "^1.1.0",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.5",
+    "redux-logger": "^3.0.6",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.6.1",
+    "webpack-chunk-hash": "^0.4.0",
+    "webpack-dev-server": "^2.4.5"
   }
 }

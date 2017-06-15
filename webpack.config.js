@@ -1,59 +1,82 @@
-var webpack = require("webpack");
-var pkg = require("./package");
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var BANNER = [
-  pkg.name + " " + pkg.version + " - " + pkg.description,
-  "Copyright (c) " + new Date().getFullYear() + " " + pkg.author.name + " - " + pkg.homepage,
-  "Licensed under the " + pkg.license + " license"
-].join("\n");
 
 module.exports = {
+	context: __dirname,
 
-  output: {
-    library: "ColorPicker",
-    libraryTarget: "umd"
-  },
+	entry: {
+		'ColorPicker': './src/ColorPicker/index.js'
+	},
 
-  externals: [{
-    "react": {
-      root: "React",
-      commonjs: "react",
-      commonjs2: "react",
-      amd: "react"
-    },
-    "react-dom": {
-      root: "ReactDOM",
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "react-dom"
-    }
-  }],
+	output: {
+		path: __dirname + '/build',
+		filename: '[name].js',
+		libraryTarget: 'umd',
+		library: 'ColorPicker',
+	},
 
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel"
-      }
-    ]
-  },
+	devtool: 'source-map',
 
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress : {
-        unsafe : true,
-        screw_ie8 : true
-      },
-      output : {
-        comments : false
-      }
-    }),
-    new webpack.BannerPlugin(BANNER)
-  ]
+	externals: {
+		"react": {
+			"commonjs": "react",
+			"commonjs2": "react",
+			"amd": "react",
+			"root": "React"
+		},
+		"react-dom": {
+			"commonjs": "react-dom",
+			"commonjs2": "react-dom",
+			"amd": "react-dom",
+			"root": "ReactDOM"
+		},
+		"classnames": {
+			"commonjs": "classnames",
+			"commonjs2": "classnames",
+			"amd": "classnames",
+			"root": "classNames"
+		},
+		"prop-types": {
+			"commonjs": "prop-types",
+			"commonjs2": "prop-types",
+			"amd": "prop-types",
+			"root": "PropTypes"
+		}
+	},
+
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				use: [ 'babel-loader' ],
+				exclude: /node_modules/
+			},
+			{
+				test: /\.s?css$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [
+						'css-loader',
+						{
+							loader: 'postcss-loader',
+							options: { plugins: () => [ require('autoprefixer') ] }
+						},
+						'sass-loader'
+					]
+				})
+			},
+		]
+	},
+
+	plugins: [
+		new webpack.DefinePlugin({
+			"process.env": {
+				NODE_ENV: JSON.stringify("production")
+			}
+		}),
+		// Compress, but don't print warnings to console
+		new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}, sourceMap: true})
+	]
 
 };
