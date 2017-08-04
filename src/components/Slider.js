@@ -1,17 +1,19 @@
 import React from "react";
-import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
+import createReactClass from "create-react-class";
+import PropTypes from "prop-types"
+import PureRenderMixin from "react-addons-pure-render-mixin";
 import cx from "classnames";
 import DraggableMixin from "./DraggableMixin";
 
 
-const Slider = React.createClass({
+const Slider = createReactClass({
 
   mixins : [DraggableMixin, PureRenderMixin],
 
   propTypes: {
-    value: React.PropTypes.number.isRequired,
-    vertical: React.PropTypes.bool,
-    background : React.PropTypes.string
+    value: PropTypes.number.isRequired,
+    vertical: PropTypes.bool,
+    background : PropTypes.string
   },
 
   getDefaultProps() {

@@ -1,8 +1,9 @@
 import React from "react";
+import createReactClass from "create-react-class";
+import PureRenderMixin from "react-addons-pure-render-mixin";
 import cx from "classnames";
-import PureRenderMixin from "react/lib/ReactComponentWithPureRenderMixin";
 
-const SwatchItem = React.createClass({
+const SwatchItem = createReactClass({
 
   mixins : [PureRenderMixin],
 
@@ -27,7 +28,7 @@ const SwatchItem = React.createClass({
 });
 
 
-const ColorSwatch = React.createClass({
+const ColorSwatch = createReactClass({
 
   mixins : [PureRenderMixin],
 
