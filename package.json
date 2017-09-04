@@ -41,12 +41,15 @@
   },
   "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0-beta || ^16.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.0",
-    "pure-color": "^1.2.0"
+    "create-react-class": "^15.0.0",
+    "prop-types": "^15.5.10",
+    "pure-color": "^1.2.0",
+    "react-addons-pure-render-mixin": "^15.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.2.0",
