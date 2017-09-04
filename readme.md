@@ -56,6 +56,10 @@ ReactDOM.render(<App initialColor="rgb(0,0,0,1)" />, document.querySelector("#ap
 
 ## Changelog
 
+### 1.4.2
+
+* Fix warnings about use of deprecated features in React 15.5 (thanks [@albertogasparin](https://github.com/albertogasparin))
+
 ### v1.4.1
 
 * Improve performance
