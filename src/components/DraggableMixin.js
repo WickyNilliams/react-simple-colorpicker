@@ -31,6 +31,10 @@ const DraggableMixin = {
     this.rect = this.getBoundingRect();
   },
 
+  componentWillUnmount() {
+    this.stopUpdates();
+  },
+
   startUpdates(e) {
     const { document } = this;
 
