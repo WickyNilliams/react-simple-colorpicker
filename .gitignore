@@ -1,5 +1,4 @@
 node_modules
-lib
 umd
 example/dist
 !example/dist/index.html
