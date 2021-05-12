@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/WickyNilliams/react-simple-colorpicker"
+    "url": "git://github.com/jozecuervo/react-simple-colorpicker"
   },
   "keywords": [
     "react",
@@ -37,9 +37,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WickyNilliams/react-simple-colorpicker/issues"
+    "url": "https://github.com/jozecuervo/react-simple-colorpicker/issues"
   },
-  "homepage": "https://github.com/WickyNilliams/react-simple-colorpicker",
+  "homepage": "https://github.com/jozecuervo/react-simple-colorpicker",
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0-beta || ^16.0.0"
@@ -60,7 +60,7 @@
     "css-loader": "^0.22.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "json-loader": "^0.5.3",
-    "node-sass": "^3.4.2",
+    "node-sass": "^6.0.0",
     "react": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0",
     "sass-loader": "^3.1.2",
