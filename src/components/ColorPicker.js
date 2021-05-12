@@ -27,13 +27,15 @@ const ColorPicker = createReactClass({
     return this.getStateFrom(this.props);
   },
 
-  componentWillReceiveProps(nextProps) {
-    const nextState = this.getStateFrom(nextProps);
-
-    if (!ColorUtils.equals(this.state.color, nextState.color)) {
-      this.setState(nextState);
-    }
-  },
+  getDerivedStateFromProps(nextProps, prevState) {
+		const nextColor = lib.color.parseToHsv(nextProps.color);
+		if (!lib.color.equals(prevState.color, nextColor)) {
+			return {
+				color: nextColor,
+			};
+		}
+		return null;
+	},
 
   getStateFrom(props) {
     return {
